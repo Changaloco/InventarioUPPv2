@@ -1,8 +1,9 @@
 const router = require('express').Router();
 const {Test} = require('../../db');
-router.get('/',(req,res)=>{
-    const tests = Test.findAll();
-    res.send(tests);
+
+router.get('/',async(req,res)=>{
+    const tests = await Test.findAll();
+    res.json(tests);
 });
 
 router.post('/',async(req,res)=>{
@@ -24,4 +25,5 @@ router.delete('/:testId',async(req,res)=>{
     });
     res.json({sucess:'se ha eliminado con exito'})
 });
+
 module.exports = router;
