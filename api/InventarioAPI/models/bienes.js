@@ -79,6 +79,9 @@ module.exports = (sequelize,type)=>{
         },
         id_Modelo:{
             type:type.INTEGER
+        },
+        id_Factura:{
+            type:type.INTEGER
         }
     })
 }

@@ -1,3 +1,4 @@
+
 module.exports = (sequelize,type)=>{
     return sequelize.define('Comentarios',{
         id_Comentario: {
@@ -12,7 +13,8 @@ module.exports = (sequelize,type)=>{
             type:type.TEXT
         },
         id_Bien:{
-            type:type.INTEGER
+            type:type.INTEGER,
+            
         }
     })
 }

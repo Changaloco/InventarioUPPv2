@@ -40,11 +40,7 @@ module.exports = (sequelize,type)=>{
         },
         id_Proveedor:{
             type:type.INTEGER
-        },
-        id_Bien:{
-            type: type.INTEGER
-        },
-        id_Trimestre:{
+        },id_Trimestre:{
             type:type.INTEGER
         }
     })
