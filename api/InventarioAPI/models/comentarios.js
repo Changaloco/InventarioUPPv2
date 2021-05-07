@@ -12,6 +12,9 @@ module.exports = (sequelize,type)=>{
         comentario:{
             type:type.TEXT
         },
+        estado:{
+            type:type.STRING
+        },
         id_Bien:{
             type:type.INTEGER,
             
