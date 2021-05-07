@@ -8,6 +8,8 @@ module.exports = (sequelize,type)=>{
         fechaResguardo: {
             type:type.DATE
         },
-        id_Bien:type.INTEGER
+        id_Bien:{
+            type:type.INTEGER
+        }
     })
 }

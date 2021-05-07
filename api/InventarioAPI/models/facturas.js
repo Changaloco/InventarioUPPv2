@@ -5,19 +5,47 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        numeroFactura:type.STRING,
-        fechaFactura:type.DATE,
-        fechaRecepcion:type.DATE,
-        folioFiscal:type.STRING,
-        RFC:type.STRING,
-        licitacion:type.STRING,
-        fechaAdquisicion:type.DATE,
-        seguimientoComite:type.STRING,
-        modalidad:type.STRING,
-        costo:type.DECIMAL(10,2),
-        archivoFactura:type.STRING,
-        id_Proveedor:type.INTEGER,
-        id_Bien:type.INTEGER,
-        id_Trimestre:type.INTEGER
+        numeroFactura:{
+            type:type.STRING
+        },
+        fechaFactura:{
+            type: type.DATE
+        },
+        fechaRecepcion:{
+            type: type.DATE
+        },
+        folioFiscal:{
+            type:type.STRING
+        },
+        RFC:{
+            type:type.STRING
+        },
+        licitacion:{
+            type:type.STRING
+        },
+        fechaAdquisicion:{
+            type:type.DATE
+        },
+        seguimientoComite:{
+            type:type.STRING
+        },
+        modalidad:{
+            type:type.STRING
+        },
+        costo:{
+            type:type.DECIMAL(10,2)
+        },
+        archivoFactura:{
+            type:type.STRING
+        },
+        id_Proveedor:{
+            type:type.INTEGER
+        },
+        id_Bien:{
+            type: type.INTEGER
+        },
+        id_Trimestre:{
+            type:type.INTEGER
+        }
     })
 }

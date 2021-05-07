@@ -5,10 +5,20 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombre: type.STRING(1234),
-        grupoBienes:type.STRING(1234),
-        subcategoria:type.STRING(1234),
-        categoria: type.STRING(1234),
-        descripcion: type.TEXT  
+        nombre: {
+            type:type.STRING(1234)
+        },
+        grupoBienes:{
+            type:type.STRING(1234)
+        },
+        subcategoria:{
+            type: type.STRING(1234)
+        },
+        categoria: {
+            type: type.STRING(1234)
+        },
+        descripcion: {
+            type: type.TEXT 
+        } 
     })
 }

@@ -5,10 +5,18 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        ejercicio: type.STRING,
-        fechaInicio:type.DATE,
-        fechaFin:type.DATE,
-        numeroTrimestre:type.INTEGER
+        ejercicio: {
+            type:type.STRING
+        },
+        fechaInicio:{
+            type:type.DATE
+        },
+        fechaFin:{
+            type:type.DATE
+        },
+        numeroTrimestre:{
+            type:type.INTEGER
+        }
 
     })
 }

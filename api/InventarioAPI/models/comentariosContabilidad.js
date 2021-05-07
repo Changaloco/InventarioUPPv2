@@ -5,8 +5,14 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        titulo: type.STRING(255),
-        comentario:type.TEXT,
-        id_Factura:type.INTEGER
+        titulo: {
+            type:type.STRING(255)
+        },
+        comentario:{
+            type:type.TEXT
+        },
+        id_Factura:{
+            type: type.INTEGER
+        }
     })
 }

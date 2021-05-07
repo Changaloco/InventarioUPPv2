@@ -5,7 +5,11 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        archivo: type.STRING(255),
-        id_Bien:type.INTEGER
+        archivo: {
+            type:type.STRING(255)
+        },
+        id_Bien:{
+            type:type.INTEGER
+        }
     })
 }

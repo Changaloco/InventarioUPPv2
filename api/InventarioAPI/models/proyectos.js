@@ -5,10 +5,20 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        claveProyecto: type.STRING,
-        nombrProyecto: type.STRING,
-        partidaPresupuestal: type.STRING,
-        fuenteFinanciamiento: type.STRING,
-        numeroCuenta: type.STRING
+        claveProyecto: {
+            type:type.STRING
+        },
+        nombrProyecto: {
+            type:type.STRING
+        },
+        partidaPresupuestal: {
+            type:type.STRING
+        },
+        fuenteFinanciamiento: {
+            type:type.STRING
+        },
+        numeroCuenta: {
+            type:type.STRING
+        }
     })
 }

@@ -5,10 +5,18 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        concepto: type.STRING,
-        vidaUtil: type.INTEGER,
-        porcentajeDepreciacionAnuall:type.DECIMAL(10,2),
-        porcentajeDepreciacionMensual:type.DECIMAL(10,2)
+        concepto: {
+            type:type.STRING
+        },
+        vidaUtil: {
+            type:type.INTEGER
+        },
+        porcentajeDepreciacionAnuall:{
+            type: type.DECIMAL(10,2)
+        },
+        porcentajeDepreciacionMensual:{
+            type: type.DECIMAL(10,2)
+        }
 
     })
 }

@@ -5,7 +5,11 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombreArea: type.STRING(255),
-        ubicacionArea:type.TEXT
+        nombreArea: {
+            type:type.STRING(255)
+        },
+        ubicacionArea:{
+            type:type.TEXT
+        }
     })
 }

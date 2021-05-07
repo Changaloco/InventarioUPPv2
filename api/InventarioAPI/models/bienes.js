@@ -5,30 +5,80 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombreBien:type.STRING,
-        descripcionBien:type.TEXT,
-        claveControl:type.STRING,
-        numeroInventarioAnterior:type.STRING,
-        numeroInventarioArmonizado:type.STRING,
-        clasificacionAdicional:type.STRING,
-        numeroSerie:type.STRING,
-        fotografiaBien:type.STRING,
-        fechaAlta:type.DATE,
-        estatusBien:type.STRING,
-        etiquetaBien:type.STRING,
-        tratamientoAdministrativo:type.STRING,
-        numeroResguardo:type.STRING,
-        costoBien:type.DECIMAL(10,2),
-        costoContable:type.DECIMAL(10,2),
-        tipoBien:type.STRING,
-        motivoBaja:type.TEXT,
-        fechaBaja:type.DATE,
-        montoDepreciacio:type.DECIMAL(10,2),
-        mesesDepreciacion:type.DECIMAL(10,2),
-        id_clasificacionConac:type.INTEGER,
-        id_Proyecto:type.INTEGER,
-        id_Departamento:type.INTEGER,
-        id_catalogoDepreciacion:type.INTEGER,
-        id_Modelo:type.INTEGER
+        nombreBien:{
+            type:type.STRING
+        },
+        descripcionBien:{
+            type:type.TEXT
+        },
+        claveControl:{
+            type:type.STRING
+        },
+        numeroInventarioAnterior:{
+            type:type.STRING
+        },
+        numeroInventarioArmonizado:{
+            type:type.STRING
+        },
+        clasificacionAdicional:{
+            type: type.STRING
+        },
+        numeroSerie:{
+            type:type.STRING
+        },
+        fotografiaBien:{
+            type: type.STRING
+        },
+        fechaAlta:{
+            type: type.DATE
+        },
+        estatusBien:{
+            type:type.STRING
+        },
+        etiquetaBien:{
+            type : type.STRING
+        },
+        tratamientoAdministrativo:{
+            type:type.STRING
+        },
+        numeroResguardo:{
+            type: type.STRING
+        },
+        costoBien:{
+            type: type.DECIMAL(10,2)
+        },
+        costoContable:{
+            type: type.DECIMAL(10,2)
+        },
+        tipoBien:{
+            type: type.STRING
+        },
+        motivoBaja:{
+            type: type.TEXT
+        },
+        fechaBaja:{
+            type:type.DATE
+        },
+        montoDepreciacion:{
+            type:type.DECIMAL(10,2)
+        },
+        mesesDepreciacion:{
+            type:type.DECIMAL(10,2)
+        },
+        id_clasificacionConac:{
+            type: type.INTEGER
+        },
+        id_Proyecto:{
+            type:type.INTEGER
+        },
+        id_Departamento:{
+            type:type.INTEGER
+        },
+        id_catalogoDepreciacion:{
+            type: type.INTEGER
+        },
+        id_Modelo:{
+            type:type.INTEGER
+        }
     })
 }

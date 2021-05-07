@@ -5,12 +5,24 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombreProveedor: type.STRING,
-        RFCproveedor:type.STRING,
-        domicilioFiscalProveedor:type.TEXT,
-        telefonoProveedor:type.STRING,
-        correoProveedor:type.STRING,
-        giro:type.TEXT
+        nombreProveedor: {
+            type: type.STRING
+        },
+        RFCproveedor:{
+            type:type.STRING
+        },
+        domicilioFiscalProveedor:{
+            type:type.TEXT
+        },
+        telefonoProveedor:{
+            type:type.STRING
+        },
+        correoProveedor:{
+            type:type.STRING
+        },
+        giro:{
+            type:type.TEXT
+        }
 
     })
 }

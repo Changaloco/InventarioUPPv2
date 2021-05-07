@@ -5,7 +5,11 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombreDepartamento: type.STRING(255),
-        ubicacionDepartamento:type.TEXT
+        nombreDepartamento: {
+            type:type.STRING(255)
+        },
+        ubicacionDepartamento:{
+            type:type.TEXT
+        }
     })
 }

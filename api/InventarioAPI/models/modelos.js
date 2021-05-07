@@ -5,8 +5,14 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        marca: type.STRING(1234),
-        submarca:type.STRING(1234),
-        modelo:type.STRING(1234)
+        marca: {
+            type:type.STRING(1234)
+        },
+        submarca:{
+            type:type.STRING(1234)
+        },
+        modelo:{
+            type:type.STRING(1234)
+        }
     })
 }

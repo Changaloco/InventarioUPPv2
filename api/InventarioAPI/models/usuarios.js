@@ -5,19 +5,45 @@ module.exports = (sequelize,type)=>{
             primaryKey: true,
             autoIncrement:true
         },
-        nombreUsuario:type.STRING,
-        apellidoMUsuario:type.STRING,
-        apellidoPUsuario:type.STRING,
-        MatriculaUsuario:type.STRING,
-        tipoUsuario:type.STRING,
-        passwordUsuario:type.STRING,
-        correoUsuario:type.STRING,
-        perfilAcademicoUsuario:type.STRING,
-        puestoUsuario:type.STRING,
-        fotoUsuario:type.STRING,
-        estatusLaboralUsuario:type.STRING,
-        id_Departamento:type.INTEGER,
-        id_Area:type.INTEGER
+        nombreUsuario:{
+            type:type.STRING
+        },
+        apellidoMUsuario:{
+            type:type.STRING
+        },
+        apellidoPUsuario:{
+            type:type.STRING
+        },
+        MatriculaUsuario:{
+            type:type.STRING
+        },
+        tipoUsuario:{
+            type:type.STRING
+        },
+        passwordUsuario:{
+            type:type.STRING
+        },
+        correoUsuario:{
+            type:type.STRING
+        },
+        perfilAcademicoUsuario:{
+            type:type.STRING
+        },
+        puestoUsuario:{
+            type:type.STRING
+        },
+        fotoUsuario:{
+            type:type.STRING
+        },
+        estatusLaboralUsuario:{
+            type:type.STRING
+        },
+        id_Departamento:{
+            type:type.INTEGER
+        },
+        id_Area:{
+            type:type.INTEGER
+        }
 
     })
 }
