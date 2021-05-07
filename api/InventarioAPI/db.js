@@ -43,20 +43,20 @@ const Resguardo  =  ResguardosModel(sequelize,Sequelize);
 const Trimestre  = TrimestresModel(sequelize,Sequelize);
 const Usuario = UsuariosModel(sequelize,Sequelize);
 // relations
-Bien.hasMany(Comentarios,{as:"comentarios",foreignKey:"id_Comentario"});
-Bien.hasMany(Resguardo,{as:"resguardo",foreignKey:"id_Resguardo"});
-Bien.hasMany(Reporte,{as:"reporte",foreignKey:'id_Reporte'});
-Bien.hasOne(Conac,{as:"conac",foreignKey:'id_clasificacionConac'});
-Bien.hasOne(Proyecto,{as:"proyecto",foreignKey:"id_Proyecto"});
-Bien.hasOne(Departamento,{as:"Departamento",foreignKey:"id_Departamento"});
-Bien.hasOne(Depreciacion,{as:"depreciacion",foreignKey:"id_CatalogoDepreciacion"});
-Bien.hasOne(Modelo,{as:"modelo",foreignKey:'id_Modelo'});
-Bien.hasOne(Factura,{as:Factura,foreignKey:'id_Factura'});
-Usuario.hasOne(Departamento,{as:"Departamento",foreignKey:"id_Departamento"});
-Usuario.hasOne(Area,{as:"area",foreignKey:'id_Area'});
-Factura.hasOne(Proveedor,{as:'proveedor',foreignKey:'id_Proveedor'});
-Factura.hasOne(Trimestre,{as:'Trimestre',foreignKey:'id_Trimestre'});
-Factura.hasMany(Contabilidad,{as:'contabilidad',foreignKey:' id_comentarioContabilidad'});
+//Bien.hasMany(Comentarios,{as:"comentarios",foreignKey:"id_Comentario"});
+//Bien.hasMany(Resguardo,{as:"resguardo",foreignKey:"id_Resguardo"});
+//Bien.hasMany(Reporte,{as:"reporte",foreignKey:'id_Reporte'});
+//Bien.hasOne(Conac,{as:"conac",foreignKey:'id_clasificacionConac'});
+//Bien.hasOne(Proyecto,{as:"proyecto",foreignKey:"id_Proyecto"});
+//Bien.hasOne(Departamento,{as:"Departamento",foreignKey:"id_Departamento"});
+//Bien.hasOne(Depreciacion,{as:"depreciacion",foreignKey:"id_CatalogoDepreciacion"});
+//Bien.hasOne(Modelo,{as:"modelo",foreignKey:'id_Modelo'});
+//Bien.hasOne(Factura,{as:Factura,foreignKey:'id_Factura'});
+//Usuario.hasOne(Departamento,{as:"Departamento",foreignKey:"id_Departamento"});
+//Usuario.hasOne(Area,{as:"area",foreignKey:'id_Area'});
+//Factura.hasOne(Proveedor,{as:'proveedor',foreignKey:'id_Proveedor'});
+//Factura.hasOne(Trimestre,{as:'Trimestre',foreignKey:'id_Trimestre'});
+//Factura.hasMany(Contabilidad,{as:'contabilidad',foreignKey:' id_comentarioContabilidad'});
 //sincronizacion
 sequelize.sync({force:false})//cambiar a true para dropear tablas
     .then(()=>{
