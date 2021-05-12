@@ -12,7 +12,7 @@ ReactDOM.render(
     <BrowserRouter>
       <Switch>
         <Route exact  path="/" component={Login}/>
-        <Route path="/register" component={Register} />>
+        <Route path="/register" component={Register} />
       </Switch>
     </BrowserRouter>
   </React.StrictMode>,
