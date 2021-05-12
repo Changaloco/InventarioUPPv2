@@ -32,8 +32,12 @@ module.exports = (sequelize,type)=>{
         puestoUsuario:{
             type:type.STRING
         },
-        fotoUsuario:{
+        nameFotoUsuario:{
             type:type.STRING
+        },typeFotoUsuario:{
+            type:type.STRING
+        },dataFotoUsuario:{
+            type:type.BLOB('long')
         },
         estatusLaboralUsuario:{
             type:type.STRING
