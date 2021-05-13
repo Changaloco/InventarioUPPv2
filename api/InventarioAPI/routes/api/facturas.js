@@ -7,7 +7,7 @@ const fs = require('fs');
 const diskstorage = multer.diskStorage({
     destination: 'storage/img',
     filename:(req,file,cb) => {
-        cb(null,Date.now()+'-upp-'+file.originalname);
+        cb(null,Date.now()+'-upp-factura-'+file.originalname);
     }
 });
 

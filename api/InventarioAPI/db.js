@@ -17,7 +17,6 @@ const ReportesModel = require("./models/reportes");
 const ResguardosModel = require("./models/resguardos");
 const TrimestresModel = require("./models/trimestres");
 const UsuariosModel = require("./models/usuarios");
-const comentarios = require("./models/comentarios");
 const Perfil = require("./models/fotosPerfil");
 //variables
 let database_port = process.env.DATABASE_PORT;
