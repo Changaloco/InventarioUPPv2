@@ -4,6 +4,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
+
 const diskstorage = multer.diskStorage({
     destination: 'storage/img',
     filename:(req,file,cb) => {
@@ -19,7 +20,7 @@ const fileUpload = multer({
 router.post('/',fileUpload,async(req,res)=>{
     const {nameFotoUsuario,typeFotoUsuario} =  req.body;
     console.log(req.file);
-
+    
     const NewPhoto = {
         nameFotoUsuario : nameFotoUsuario,
         typeFotoUsuario : typeFotoUsuario,

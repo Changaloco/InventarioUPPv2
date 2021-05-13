@@ -12,6 +12,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import NavBarBase from '../navBar';
 
 function Copyright() {
   return (
@@ -51,6 +52,7 @@ export default function SignIn() {
 
   return (
     <Container component="main" maxWidth="xs">
+    <NavBarBase/>
       <CssBaseline />
       <div className={classes.paper}>
         <Avatar className={classes.avatar}>
