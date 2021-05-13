@@ -1,4 +1,5 @@
 const router =  require('express').Router();
+const middlewares = require('../libs/middlewares');
 const apiTestRouter = require('./api/tests');
 const apiAreaRouter = require('./api/areas');
 const apiDepartamentoRouter = require('./api/departamentos');
@@ -11,10 +12,10 @@ const apiProyectosRouter = require('./api/proyectos');
 const apiUsuariosRouter = require('./api/usuarios');
 const apiPerfilesRouter = require('./api/imagenesPerfil');
 
-router.use('/tests',apiTestRouter);
+router.use('/tests', apiTestRouter);
 router.use('/areas',apiAreaRouter);
 router.use('/departamentos',apiDepartamentoRouter);
-router.use('/proveedores',apiProveedoresRouter);
+router.use('/proveedores',middlewares.checkToken,apiProveedoresRouter);
 router.use('/trimestre',apiTrimestresRouter);
 router.use('/modelos',apiModelosRouter);
 router.use('/conac',apiConacRouter);
