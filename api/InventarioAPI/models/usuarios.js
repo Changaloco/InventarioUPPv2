@@ -14,7 +14,7 @@ module.exports = (sequelize,type)=>{
         apellidoPUsuario:{
             type:type.STRING
         },
-        MatriculaUsuario:{
+        matriculaUsuario:{
             type:type.STRING
         },
         tipoUsuario:{
@@ -32,12 +32,8 @@ module.exports = (sequelize,type)=>{
         puestoUsuario:{
             type:type.STRING
         },
-        nameFotoUsuario:{
-            type:type.STRING
-        },typeFotoUsuario:{
-            type:type.STRING
-        },dataFotoUsuario:{
-            type:type.BLOB('long')
+        fotoUsuario:{
+            type:type.STRING(1200)
         },
         estatusLaboralUsuario:{
             type:type.STRING

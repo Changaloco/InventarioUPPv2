@@ -18,6 +18,7 @@ const ResguardosModel = require("./models/resguardos");
 const TrimestresModel = require("./models/trimestres");
 const UsuariosModel = require("./models/usuarios");
 const comentarios = require("./models/comentarios");
+const Perfil = require("./models/fotosPerfil");
 //variables
 let database_port = process.env.DATABASE_PORT;
 let database_name = process.env.DATABASE_NAME;
@@ -47,6 +48,7 @@ const Reporte = ReportesModel(sequelize, Sequelize);
 const Resguardo = ResguardosModel(sequelize, Sequelize);
 const Trimestre = TrimestresModel(sequelize, Sequelize);
 const Usuario = UsuariosModel(sequelize, Sequelize);
+const Perfiles = Perfil(sequelize, Sequelize);
 // relations
 //Bien.hasMany(Comentarios,{as:"comentarios",foreignKey:"id_Comentario"});
 //Bien.hasMany(Resguardo,{as:"resguardo",foreignKey:"id_Resguardo"});
@@ -89,4 +91,5 @@ module.exports = {
   Resguardo,
   Trimestre,
   Usuario,
+  Perfiles
 };

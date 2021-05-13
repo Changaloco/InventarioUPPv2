@@ -17,6 +17,7 @@ app.get('/',(req,res)=>{
 })
 
 app.use(morgan('dev'));
+app.use(express.static('storage/img'));
 
 app.listen(4000,()=>{
     console.log('server started')

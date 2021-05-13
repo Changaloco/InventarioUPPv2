@@ -1,5 +1,4 @@
 const router =  require('express').Router();
-
 const apiTestRouter = require('./api/tests');
 const apiAreaRouter = require('./api/areas');
 const apiDepartamentoRouter = require('./api/departamentos');
@@ -10,6 +9,7 @@ const apiConacRouter = require('./api/clasificacionesCONAC');
 const apiDepreciacionRouter = require('./api/depreciaciones');
 const apiProyectosRouter = require('./api/proyectos');
 const apiUsuariosRouter = require('./api/usuarios');
+const apiPerfilesRouter = require('./api/imagenesPerfil');
 
 router.use('/tests',apiTestRouter);
 router.use('/areas',apiAreaRouter);
@@ -21,5 +21,7 @@ router.use('/conac',apiConacRouter);
 router.use('/depreciacion',apiDepreciacionRouter);
 router.use('/proyectos',apiProyectosRouter);
 router.use('/usuarios',apiUsuariosRouter);
+router.use('/perfil',apiPerfilesRouter);
+
 
 module.exports= router;
