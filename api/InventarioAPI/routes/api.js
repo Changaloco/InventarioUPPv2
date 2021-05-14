@@ -12,6 +12,8 @@ const apiProyectosRouter = require('./api/proyectos');
 const apiUsuariosRouter = require('./api/usuarios');
 const apiPerfilesRouter = require('./api/imagenesPerfil');
 const apiFacturaRouter = require('./api/facturas')
+const apiBienesRouter = require('./api/bienes');
+
 
 router.use('/tests', apiTestRouter);
 router.use('/areas',apiAreaRouter);
@@ -25,5 +27,6 @@ router.use('/proyectos',apiProyectosRouter);
 router.use('/usuarios',apiUsuariosRouter);
 router.use('/perfil',apiPerfilesRouter);
 router.use('/facturas',apiFacturaRouter);
+router.use('/bienes',apiBienesRouter);
 
 module.exports= router;
