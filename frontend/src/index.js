@@ -1,27 +1,29 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import reportWebVitals from './reportWebVitals';
-import {BrowserRouter,Route,Switch} from 'react-router-dom';
-import Login from './components/login/login';
-import Register from './components/login/register';
-import  Dashboard from './components/dashboard/Dashboard';
+import React from "react";
+import ReactDOM from "react-dom";
+import { UserContextProvider } from "./context/UserContext";
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Login from "./components/login/login";
+import Register from "./components/login/register";
+import Dashboard from "./components/dashboard/Dashboard";
+import Menu from "./pages/menuPage";
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <Switch>
-        <Route exact  path="/" component={Login}/>
-        <Route path="/register" component={Register} />
-        <Route path = '/menu' component={Dashboard} />
-      </Switch>
-    </BrowserRouter>
+    <UserContextProvider>
+      <BrowserRouter>
+      
+      <Route exact path="/" component={Login} />
+        <Switch>
+        
+          <Route path="/register" component={Register} />
+          <Route path="/menu" component={Dashboard} />
+          <Route path="/header" component={Menu}/>
+        </Switch>
+      </BrowserRouter>
+    </UserContextProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+

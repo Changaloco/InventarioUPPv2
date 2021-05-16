@@ -8,7 +8,10 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
+import {Link} from 'react-router-dom';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+
+
 
 export const mainListItems = (
   <div>
@@ -16,7 +19,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText  primary="Usuarios" />
     </ListItem>
     <ListItem button>
       <ListItemIcon>

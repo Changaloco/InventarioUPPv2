@@ -2,8 +2,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const apiRouter =  require('./routes/api');
 const morgan = require('morgan');
+const cors = require('cors');
 
+const config = require('./config');
 const app = express();
+app.use(cors(config));
 require('./db');
 
 
