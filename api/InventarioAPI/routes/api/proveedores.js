@@ -15,7 +15,7 @@ router.post('/',async(req,res)=>{
 
 router.put('/:id_Proveedor',async (req,res)=>{
     await Proveedor.update(req.body,{
-        where: {id_Proveedor: req.params.id_Departamento}
+        where: {id_Proveedor: req.params.id_Proveedor}
     });
     res.json({sucess:'Proveedor actualizado con exito'});
 });

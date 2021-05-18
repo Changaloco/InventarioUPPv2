@@ -29,7 +29,7 @@ function Proveedores() {
     }));
   };
 //Consumo de la API //Todos los metodos
-  const insertUser = async () => {
+  const insertProveedor = async () => {
     await axios
       .post("http://localhost:4000/api/proveedores", proveedorSelected)
       .then(
@@ -37,24 +37,30 @@ function Proveedores() {
         OpenCloseModalInsert()
       );
   };
-  const updateProveedor = async () => {
-    await axios.put("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor)
+
+  
+
+
+  const updateProveedor=async()=>{
+    await axios.put(("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor), proveedorSelected)
     .then(response=>{
-      var newData = proveedores;
-      newData.map(proveedores=>{
+      var dataNueva=proveedores;
+      dataNueva.map(proveedores=>{
         if(proveedorSelected.id_Proveedor===proveedores.id_Proveedor){
           proveedores.nombreProveedor=proveedorSelected.nombreProveedor;
           proveedores.RFCproveedor=proveedorSelected.RFCproveedor;
           proveedores.domicilioFiscalProveedor=proveedorSelected.domicilioFiscalProveedor;
           proveedores.telefonoProveedor=proveedorSelected.telefonoProveedor;
-          proveedores.correoProveedor = proveedorSelected.correoProveedor;
-          proveedores.giro = proveedorSelected.giro;
+          proveedores.correoProveedor=proveedorSelected.correoProveedor;
+          proveedores.giro=proveedorSelected.giro;
         }
       })
-      setProveedores(newData);
+      setProveedores(dataNueva);
+      setProveedorSelected(null);
       OpenCloseModalEdit();
     })
   }
+
   const deleteProveedor = async () => {
     await axios.delete("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor)
     .then(response =>{
@@ -191,7 +197,7 @@ function Proveedores() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={insertUser}>
+          <Button variant="primary" onClick={insertProveedor}>
             Guardar
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
