@@ -1,5 +1,5 @@
-import React from 'react';
-import Navbar from '../components/sidebar/Navbar';
+import React from "react";
+import Navbar from "../components/sidebar/Navbar";
 import { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
@@ -10,32 +10,59 @@ import axios from "axios";
 function Proveedores() {
   const [modalInsert, setModalInsert] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
+  const [modalEliminar, setModalEliminar] = useState(false);
   const [proveedores, setProveedores] = useState([]);
-  const [proveedorSelected,setProveedorSelected] = useState({
-    nombreProveedor:'',
-    RFCproveedor:'', 
-    domicilioFiscalProveedor: '',
-    telefonoProveedor:'',
-    correoProveedor:'',
-    giro:''
+  const [proveedorSelected, setProveedorSelected] = useState({
+    nombreProveedor: "",
+    RFCproveedor: "",
+    domicilioFiscalProveedor: "",
+    telefonoProveedor: "",
+    correoProveedor: "",
+    giro: "",
   });
-  
-  const handleChange=e=>{
-    const{name,value}=e.target;
-    setProveedorSelected(prevState=>({
+//Recepcion de datos , lectura en el estado.
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setProveedorSelected((prevState) => ({
       ...prevState,
-      [name]:value
-    }))
-    console.log(proveedorSelected);
+      [name]: value,
+    }));
+  };
+//Consumo de la API //Todos los metodos
+  const insertUser = async () => {
+    await axios
+      .post("http://localhost:4000/api/proveedores", proveedorSelected)
+      .then(
+        (response) => setProveedores(proveedores.concat(response.data)),
+        OpenCloseModalInsert()
+      );
+  };
+  const updateProveedor = async () => {
+    await axios.put("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor)
+    .then(response=>{
+      var newData = proveedores;
+      newData.map(proveedores=>{
+        if(proveedorSelected.id_Proveedor===proveedores.id_Proveedor){
+          proveedores.nombreProveedor=proveedorSelected.nombreProveedor;
+          proveedores.RFCproveedor=proveedorSelected.RFCproveedor;
+          proveedores.domicilioFiscalProveedor=proveedorSelected.domicilioFiscalProveedor;
+          proveedores.telefonoProveedor=proveedorSelected.telefonoProveedor;
+          proveedores.correoProveedor = proveedorSelected.correoProveedor;
+          proveedores.giro = proveedorSelected.giro;
+        }
+      })
+      setProveedores(newData);
+      OpenCloseModalEdit();
+    })
   }
-
-  const insertUser=async()=>{
-    await axios.post('http://localhost:4000/api/proveedores',proveedorSelected)
-    .then(response=>
-      setProveedores(proveedores.concat(response.data)), 
-      OpenCloseModalInsert()
-      )
+  const deleteProveedor = async () => {
+    await axios.delete("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor)
+    .then(response =>{
+      setProveedores(proveedores.filter(proveedores=>proveedores.id_Proveedor!==proveedorSelected.id_Proveedor));
+      abrirCerrarModalEliminar();
+    })
   }
+ 
   useEffect(() => {
     async function fetchData() {
       await axios
@@ -50,26 +77,35 @@ function Proveedores() {
     fetchData();
   }, []);
 
+  const selectProveedor = (proveedor, caso) => {
+    setProveedorSelected(proveedor);
+    caso === "Editar" ? OpenCloseModalEdit() : abrirCerrarModalEliminar();
+  };
+
+//Control //Funcionamiento de los Modales
+
   const OpenCloseModalInsert = () => {
     setModalInsert(!modalInsert);
   };
-  const OpenCloseModalEdit = ()=>{
+  const OpenCloseModalEdit = () => {
     setModalEdit(!modalEdit);
-  }
+  };
 
-  const selectProveedor= (proveedor,caso) => {
-    setProveedorSelected(proveedor);
-    (caso ==='Editar')&&setModalEdit(true)
-  }
+  const abrirCerrarModalEliminar = () => {
+    setModalEliminar(!modalEliminar);
+  };
+
+
+  
 
   return (
     <>
-    <div>
+      <div>
         <Navbar />
         <div className="menu">
           <h1>Proveedores</h1>
           <Button variant="primary" onClick={OpenCloseModalInsert}>
-            Agregar Usuario
+            Nuevo Proveedor
           </Button>
           <Table striped bordered hover>
             <thead>
@@ -81,7 +117,6 @@ function Proveedores() {
                 <th>Telefono</th>
                 <th>Correo Electronico</th>
                 <th>Giro</th>
-               
               </tr>
             </thead>
             <tbody>
@@ -95,9 +130,19 @@ function Proveedores() {
                   <td>{proveedor.correoProveedor}</td>
                   <td>{proveedor.giro}</td>
                   <td>
-                    <Button variant="success">Editar</Button>
+                    <Button
+                      variant="success"
+                      onClick={() => selectProveedor(proveedor, "Editar")}
+                    >
+                      Editar
+                    </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="danger">Eliminar</Button>
+                    <Button
+                      variant="danger"
+                      onClick={() => selectProveedor(proveedor, "Eliminar")}
+                    >
+                      Eliminar
+                    </Button>
                   </td>
                 </tr>
               ))}
@@ -106,61 +151,13 @@ function Proveedores() {
         </div>
       </div>
 
-
-
       <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
         <Modal.Header>
           <Modal.Title>Insertar Nuevo Proveedor</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
-            <Form.Group >
-              <Form.Label>Nombre Proveedor</Form.Label>
-              <Form.Control name="nombreProveedor" value={proveedorSelected && proveedorSelected.nombreProveedor} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>RFC del Proveedor </Form.Label>
-              <Form.Control name="RFCproveedor" value={proveedorSelected && proveedorSelected.RFCproveedor} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>Domicilio del Proveedor</Form.Label>
-              <Form.Control name="domicilioFiscalProveedor" value={proveedorSelected && proveedorSelected.domicilioFiscalProveedor} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>Telefono del Proveedor</Form.Label>
-              <Form.Control name="telefonoProveedor" value={proveedorSelected && proveedorSelected.telefonoProveedor} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Correo Electronico</Form.Label>
-              <Form.Control type="email" name="correoProveedor" value={proveedorSelected && proveedorSelected.correoProveedor} onChange={handleChange} />
-            </Form.Group>
-            <Form.Group controlId="formBasicEmail">
-              <Form.Label>Giro</Form.Label>
-              <Form.Control  name="giro" value={proveedorSelected && proveedorSelected.giro} onChange={handleChange} />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={insertUser}>Guardar</Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="secondary" onClick={OpenCloseModalInsert}>
-            Cerrar
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-
-
-      <Modal show={modalEdit} onHide={OpenCloseModalEdit}>
-        <Modal.Header>
-          <Modal.Title>Editar Proveedor</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
-            <Form.Group >
+            <Form.Group>
               <Form.Label>Nombre Proveedor</Form.Label>
               <Form.Control name="nombreProveedor" onChange={handleChange} />
             </Form.Group>
@@ -170,7 +167,10 @@ function Proveedores() {
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Label>Domicilio del Proveedor</Form.Label>
-              <Form.Control name="domicilioFiscalProveedor" onChange={handleChange} />
+              <Form.Control
+                name="domicilioFiscalProveedor"
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Label>Telefono del Proveedor</Form.Label>
@@ -178,22 +178,115 @@ function Proveedores() {
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Correo Electronico</Form.Label>
-              <Form.Control type="email" name="correoProveedor" onChange={handleChange} />
+              <Form.Control
+                type="email"
+                name="correoProveedor"
+                onChange={handleChange}
+              />
             </Form.Group>
             <Form.Group controlId="formBasicEmail">
               <Form.Label>Giro</Form.Label>
-              <Form.Control  name="giro" onChange={handleChange} />
+              <Form.Control name="giro" onChange={handleChange} />
             </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={insertUser}>Guardar</Button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="primary" onClick={insertUser}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={OpenCloseModalInsert}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={modalEdit} onHide={OpenCloseModalEdit}>
+        <Modal.Header>
+          <Modal.Title>Editar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nombre Proveedor</Form.Label>
+              <Form.Control
+                name="nombreProveedor"
+                value={proveedorSelected && proveedorSelected.nombreProveedor}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>RFC del Proveedor </Form.Label>
+              <Form.Control
+                value={proveedorSelected && proveedorSelected.RFCproveedor}
+                name="RFCproveedor"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Domicilio del Proveedor</Form.Label>
+              <Form.Control
+                name="domicilioFiscalProveedor"
+                value={
+                  proveedorSelected &&
+                  proveedorSelected.domicilioFiscalProveedor
+                }
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Telefono del Proveedor</Form.Label>
+              <Form.Control
+                value={proveedorSelected && proveedorSelected.telefonoProveedor}
+                name="telefonoProveedor"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Correo Electronico</Form.Label>
+              <Form.Control
+                type="email"
+                value={proveedorSelected && proveedorSelected.correoProveedor}
+                name="correoProveedor"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Giro</Form.Label>
+              <Form.Control
+                value={proveedorSelected && proveedorSelected.giro}
+                name="giro"
+                onChange={handleChange}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={()=>updateProveedor()}>
+            Modificar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Button variant="secondary" onClick={OpenCloseModalEdit}>
             Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={modalEliminar} onHide={abrirCerrarModalEliminar}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={()=>deleteProveedor()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={abrirCerrarModalEliminar}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>
