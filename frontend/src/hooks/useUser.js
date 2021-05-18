@@ -13,17 +13,19 @@ export default function useUser() {
         correoUsuario,
         passwordUsuario,
       }).then((jwt) => {
+        window.sessionStorage.setItem('jwt', jwt);
         setState({loading: false, error:false});
-        console.log(jwt);
         setJWT("jwt");
       })
-      .catch((err) => {
+      .catch((err,jwt) => {
+        window.sessionStorage.removeItem('jwt', jwt);
         setState({loading: false, error:true});
         console.error(err)
       })
     },[setJWT])
 
   const logout = useCallback(() => {
+    window.sessionStorage.removeItem('jwt', jwt);
     setJWT(null);
   }, [setJWT]);
 

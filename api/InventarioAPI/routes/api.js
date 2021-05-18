@@ -18,7 +18,7 @@ const apiBienesRouter = require('./api/bienes');
 router.use('/tests', apiTestRouter);
 router.use('/areas',apiAreaRouter);
 router.use('/departamentos',apiDepartamentoRouter);
-router.use('/proveedores',middlewares.checkToken,apiProveedoresRouter);
+router.use('/proveedores',apiProveedoresRouter);
 router.use('/trimestre',apiTrimestresRouter);
 router.use('/modelos',apiModelosRouter);
 router.use('/conac',apiConacRouter);

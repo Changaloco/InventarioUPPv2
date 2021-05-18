@@ -1,16 +1,16 @@
 import React from 'react';
 import Navbar from '../components/sidebar/Navbar';
 
-function Menu() {
+function Conac() {
   return (
     
     <div>
       <Navbar/>
       <div className='menu'>
-      <h1>Home</h1>
+      <h1>CONAC</h1>
     </div>
     </div>
   );
 }
 
-export default Menu;
+export default Conac;

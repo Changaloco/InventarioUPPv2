@@ -1,16 +1,16 @@
 import React from 'react';
 import Navbar from '../components/sidebar/Navbar';
 
-function Menu() {
+function Proyectos() {
   return (
     
     <div>
       <Navbar/>
       <div className='menu'>
-      <h1>Home</h1>
+      <h1>Proyectos</h1>
     </div>
     </div>
   );
 }
 
-export default Menu;
+export default Proyectos;

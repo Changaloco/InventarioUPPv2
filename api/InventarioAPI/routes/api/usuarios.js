@@ -100,5 +100,10 @@ const createToken = (usuario)=>{
 }
 
 
+router.get('/',async(req,res)=>{
+    const usuarios = await Usuario.findAll();
+    res.json(usuarios);
+});
+
 
 module.exports = router;
