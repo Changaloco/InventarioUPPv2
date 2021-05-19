@@ -18,9 +18,9 @@ router.get("/", async (req, res) => {
     res.json({ sucess: "Depreciacion actualizada con exito" });
   });
   
-  router.delete("/:id_Modelo", async (req, res) => {
+  router.delete("/:id_CatalogoDepreciacion", async (req, res) => {
     await Depreciacion.destroy({
-      where: { id_Modelo: req.params.id_CatalogoDepreciacion },
+      where: { id_CatalogoDepreciacion: req.params.id_CatalogoDepreciacion },
     });
     res.json({ sucess: "Depreciacion Eliminada con Exito" });
   });
