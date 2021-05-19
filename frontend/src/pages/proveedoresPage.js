@@ -113,7 +113,7 @@ function Proveedores() {
           <Button variant="primary" onClick={OpenCloseModalInsert}>
             Nuevo Proveedor
           </Button>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
                 <th>Id</th>
@@ -123,6 +123,7 @@ function Proveedores() {
                 <th>Telefono</th>
                 <th>Correo Electronico</th>
                 <th>Giro</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>
