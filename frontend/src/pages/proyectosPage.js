@@ -188,8 +188,8 @@ function Proyectos() {
           </Button>
         </Modal.Footer>
       </Modal>
-
-    <Modal show={modalDelete} onHide={() => OpenCloseModalEdit()}>
+    
+    <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
         <Modal.Header>
           <Modal.Title>Eliminar Proveedor</Modal.Title>
         </Modal.Header>
@@ -202,6 +202,51 @@ function Proyectos() {
           </Button>
           <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
             Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+      <Modal show={modalEdit} onHide={() => OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Editar El Proyecto</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Clave del Proyecto</Form.Label>
+              <Form.Control name="claveProyecto" value={proyectoSelected && proyectoSelected.claveProyecto} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Nombre del Proyecto</Form.Label>
+              <Form.Control name="nombrProyecto" value={proyectoSelected && proyectoSelected.nombrProyecto} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Partida Presupuestal</Form.Label>
+              <Form.Control name="partidaPresupuestal" value={proyectoSelected && proyectoSelected.partidaPresupuestal} onChange={handleChange} />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Fuente de financiamiento</Form.Label>
+              <Form.Control name="fuenteFinanciamiento" value={proyectoSelected && proyectoSelected.fuenteFinanciamiento} onChange={handleChange} />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Numero de cuenta.</Form.Label>
+              <Form.Control name="numeroCuenta" value={proyectoSelected && proyectoSelected.numeroCuenta} onChange={handleChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => editProyecto()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={()=>OpenCloseModalEdit()}>
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>

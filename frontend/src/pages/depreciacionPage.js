@@ -169,12 +169,20 @@ function Depreciacion() {
             
             <Form.Group >
               <Form.Label>Años de vida util.</Form.Label>
-              <Form.Control name="vidaUtil" as="select">
+              <Form.Control name="vidaUtil"  onChange={handleChange}  as="select">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>
                 <option value="4">4</option>
                 <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
               </Form.Control>
             </Form.Group>
           
@@ -208,7 +216,7 @@ function Depreciacion() {
         </Modal.Footer>
       </Modal>
 
-      <Modal show={modalDelete} onHide={() => OpenCloseModalEdit()}>
+      <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
         <Modal.Header>
           <Modal.Title>Eliminar Proveedor</Modal.Title>
         </Modal.Header>
@@ -221,6 +229,70 @@ function Depreciacion() {
           </Button>
           <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
             Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalEdit} onHide={() => OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Concepto</Form.Label>
+              <Form.Control name="concepto" value={depreciacionSelected && depreciacionSelected.concepto} onChange={handleChange} />
+            </Form.Group>
+            
+            <Form.Group >
+              <Form.Label>Años de vida util.</Form.Label>
+              <Form.Control name="vidaUtil" value={depreciacionSelected && depreciacionSelected.vidaUtil} onChange={handleChange}   as="select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+              </Form.Control>
+            </Form.Group>
+          
+            <Form.Group>
+              <Form.Label>Depreciacion Anual %</Form.Label>
+              <Form.Control
+                name="porcentajeDepreciacionAnuall"
+                value={depreciacionSelected && depreciacionSelected.porcentajeDepreciacionAnuall}
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Depreciacion Mensual %</Form.Label>
+              <Form.Control
+                name="porcentajeDepreciacionMensual"
+                value={depreciacionSelected && depreciacionSelected.porcentajeDepreciacionMensual}
+                onChange={handleChange}
+              />
+            </Form.Group>
+            
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => editDepreciacion()}>
+            Actualizar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={() => OpenCloseModalEdit()}>
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
