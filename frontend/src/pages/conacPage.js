@@ -58,6 +58,7 @@ function Conac() {
     await axios.delete("conac/"+conacSelected.id_clasificacionConac)
     .then((response)=>{
       setConac(conac.filter(conac=>conac.id_clasificacionConac !== conacSelected.id_clasificacionConac));
+      setConacSelected(null);
       OpenCloseModalDelete();
     })
   }

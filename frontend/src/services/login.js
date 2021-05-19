@@ -14,6 +14,7 @@ export default function login({correoUsuario,passwordUsuario}){
         return res.json()
     }).then(res=>{
         const{jwt} = res
-        return jwt
+        const{usuario} = res
+        return {jwt,usuario}
     })
 }

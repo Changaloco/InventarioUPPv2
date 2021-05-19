@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
+import FormFile from 'react-bootstrap/FormFile'
 import axios from "axios";
 function Usuarios() {
   const [modalInsert, setModalInsert] = useState(false);
@@ -33,6 +34,7 @@ function Usuarios() {
     }))
     console.log(userSelected);
   }
+
 
 
   const insertUser=async()=>{
@@ -107,6 +109,8 @@ function Usuarios() {
           </Table>
         </div>
       </div>
+
+
       <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
         <Modal.Header>
           <Modal.Title>Insertar Usuario</Modal.Title>
@@ -172,7 +176,7 @@ function Usuarios() {
             </Form.Group>
             <Form.Group>
               <Form.Label>Fotografia</Form.Label>
-              <Form.File name="image" onChange={handleChange} id="exampleFormControlFile1" />
+              <Form.File name="image" onChange={handleChange}  />
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label >Estatus Laboral</Form.Label>

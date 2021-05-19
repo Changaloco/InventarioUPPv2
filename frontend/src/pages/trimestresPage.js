@@ -8,7 +8,6 @@ import Form from "react-bootstrap/Form";
 import { axios } from "../services/axios";
 
 function Trimestres() {
-
   const [modalInsert, setModalInsert] = useState(false);
   const [modalEdit, setModalEdit] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
@@ -16,7 +15,7 @@ function Trimestres() {
   const [trimestreSelected, setTrimestreSelected] = useState({
     ejercicio: "",
     fechaInicio: "",
-    fechaFin:"",
+    fechaFin: "",
     numeroTrimestre: "",
   });
   const handleChange = (e) => {
@@ -27,7 +26,7 @@ function Trimestres() {
     }));
   };
   //*funciones axios
-  const insertModelo = async () => {
+  const insertTrimestre = async () => {
     await axios
       .post("trimestre", trimestreSelected)
       .then(
@@ -36,12 +35,12 @@ function Trimestres() {
         setTrimestreSelected(null)
       );
   };
-  const editModelo = async () => {
+  const editTrimestre = async () => {
     await axios
       .put("trimestre/" + trimestreSelected.id_Trimestre, trimestreSelected)
       .then((response) => {
         var dataNueva = trimestres;
-        dataNueva.map((modelos) => {
+        dataNueva.map((trimestres) => {
           if (trimestreSelected.id_Trimestre === trimestres.id_Trimestre) {
             trimestres.ejercicio = trimestreSelected.ejercicio;
             trimestres.fechaInicio = trimestreSelected.fechaInicio;
@@ -54,11 +53,19 @@ function Trimestres() {
         OpenCloseModalEdit();
       });
   };
-  const deleteModelo = async () => {
-    await axios.delete("trimestre/" + trimestreSelected.id_Trimestre).then((response) => {
-      setTrimestres(trimestres.filter((trimestres) => trimestres.id_Trimestre !== trimestreSelected.id_Trimestre));
-      OpenCloseModalDelete();
-    });
+  const deleteTrimestre = async () => {
+    await axios
+      .delete("trimestre/" + trimestreSelected.id_Trimestre)
+      .then((response) => {
+        setTrimestres(
+          trimestres.filter(
+            (trimestres) =>
+              trimestres.id_Trimestre !== trimestreSelected.id_Trimestre
+          )
+        );
+        setTrimestreSelected(null);
+        OpenCloseModalDelete();
+      });
   };
   //*hook efectos de la pagina
   useEffect(() => {
@@ -75,7 +82,7 @@ function Trimestres() {
     fetchData();
   }, []);
   //*Funciones Modales
-  const selectModelo = (trimestre, caso) => {
+  const selectTrimestre = (trimestre, caso) => {
     setTrimestreSelected(trimestre);
     caso === "Editar" ? OpenCloseModalEdit() : OpenCloseModalDelete();
   };
@@ -90,17 +97,17 @@ function Trimestres() {
   };
 
   return (
-    
-    <div>
-      <Navbar/>
-      <div className='menu'>
-      <h1>Trimestres</h1>
-      <Button variant="primary" >
+    <>
+      <div>
+        <Navbar />
+        <div className="menu">
+          <h1>Trimestres</h1>
+          <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
             Nuevo Trimestre Agregado
           </Button>
-    </div>
-    <div>
-    <Table striped bordered hover>
+        </div>
+        <div>
+          <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Id</th>
@@ -111,11 +118,137 @@ function Trimestres() {
               </tr>
             </thead>
             <tbody>
-              
+              {trimestres.map((trimestres) => (
+                <tr key={trimestres.id_Trimestre}>
+                  <td>{trimestres.id_Trimestre}</td>
+                  <td>{trimestres.ejercicio}</td>
+                  <td>{trimestres.fechaInicio}</td>
+                  <td>{trimestres.fechaFin}</td>
+                  <td>Q{trimestres.numeroTrimestre}</td>
+                  <td>
+                    <Button
+                      variant="success"
+                      onClick={() => selectTrimestre(trimestres, "Editar")}
+                    >
+                      Editar
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button
+                      variant="danger"
+                      onClick={() => selectTrimestre(trimestres, "Eliminar")}
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
-    </div>
-    </div>
+        </div>
+      </div>
+
+      <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Ejercicio</Form.Label>
+              <Form.Control name="ejercicio"  onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Fecha de Inicio</Form.Label>
+              <Form.Control name="fechaInicio" type="date" onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Fecha de Fin</Form.Label>
+              <Form.Control name="fechaFin" type="date" onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Example select</Form.Label>
+              <Form.Control name="numeroTrimestre"  onChange={handleChange} as="select">
+                <option value="1">Q1</option>
+                <option value="2">Q2</option>
+                <option value="3">Q3</option>
+                <option value="4">Q4</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => insertTrimestre()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={()=>OpenCloseModalInsert()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => deleteTrimestre()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+      <Modal show={modalEdit} onHide={()=>OpenCloseModalDelete()}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Ejercicio</Form.Label>
+              <Form.Control name="ejercicio" value={trimestreSelected && trimestreSelected.ejercicio} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Fecha de Inicio</Form.Label>
+              <Form.Control name="fechaInicio"  value={trimestreSelected && trimestreSelected.fechaInicio} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Fecha de Fin</Form.Label>
+              <Form.Control name="fechaFin" value={trimestreSelected && trimestreSelected.fechaFin} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Example select</Form.Label>
+              <Form.Control name="numeroTrimestre" value={trimestreSelected && trimestreSelected.numeroTrimestre} onChange={handleChange} as="select">
+                <option value="1">Q1</option>
+                <option value="2">Q2</option>
+                <option value="3">Q3</option>
+                <option value="4">Q4</option>
+              </Form.Control>
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => editTrimestre()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={()=>OpenCloseModalEdit()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

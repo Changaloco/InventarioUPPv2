@@ -193,7 +193,7 @@ function Areas() {
 
 
 
-      <Modal show={modalDelete} onHide={()=>OpenCloseModalEdit()}>
+      <Modal show={modalDelete} onHide={()=>OpenCloseModalDelete()}>
         <Modal.Header>
           <Modal.Title>Eliminar Proveedor</Modal.Title>
         </Modal.Header>

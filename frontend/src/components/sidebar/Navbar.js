@@ -7,14 +7,14 @@ import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
 import useUser from "../../hooks/useUser";
-import Image from 'react-bootstrap/Image';
+import Avatar from '@material-ui/core/Avatar';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const { isLoggedIn, logout } = useUser();
   const location = useLocation();
-
+  const avatarPath = "http://localhost:4000/"+ sessionStorage.userFoto ; 
   useEffect(() => {
     if (!isLoggedIn) <Redirect
     to={{
@@ -36,9 +36,10 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <Image src="holder.js/200x200" roundedCircle />
+          <h5 className="user-title">{sessionStorage.userName}  {sessionStorage.userApellido}</h5>
+          <Avatar alt="ProfileImage" src={avatarPath} />
           <Link to="/" onClick={handleClick}>
-            Cerrar Sesion
+            <h7>CerrarSesion</h7>
           </Link>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>

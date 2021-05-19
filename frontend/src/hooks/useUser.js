@@ -13,19 +13,22 @@ export default function useUser() {
         correoUsuario,
         passwordUsuario,
       }).then((jwt) => {
-        window.sessionStorage.setItem('jwt', jwt);
+        window.sessionStorage.setItem('jwt', jwt.jwt);
+        window.sessionStorage.setItem('userFoto', jwt.usuario.fotoUsuario);
+        window.sessionStorage.setItem('userName',jwt.usuario.nombreUsuario);
+        window.sessionStorage.setItem('userApellido',jwt.usuario.apellidoPUsuario);
         setState({loading: false, error:false});
         setJWT("jwt");
       })
       .catch((err,jwt) => {
-        window.sessionStorage.removeItem('jwt', jwt);
+        window.sessionStorage.removeItem('jwt', jwt.jwt);
         setState({loading: false, error:true});
         console.error(err)
       })
     },[setJWT])
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem('jwt', jwt);
+    window.sessionStorage.removeItem('jwt', jwt.jwt);
     setJWT(null);
   }, [setJWT]);
 

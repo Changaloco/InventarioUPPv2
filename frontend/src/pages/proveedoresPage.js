@@ -65,6 +65,7 @@ function Proveedores() {
     await axios.delete("http://localhost:4000/api/proveedores/"+proveedorSelected.id_Proveedor)
     .then(response =>{
       setProveedores(proveedores.filter(proveedores=>proveedores.id_Proveedor!==proveedorSelected.id_Proveedor));
+      setProveedorSelected(null);
       abrirCerrarModalEliminar();
     })
   }
@@ -158,7 +159,7 @@ function Proveedores() {
         </div>
       </div>
 
-      <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
+      <Modal show={modalInsert} onHide={()=>OpenCloseModalInsert()}>
         <Modal.Header>
           <Modal.Title>Insertar Nuevo Proveedor</Modal.Title>
         </Modal.Header>
@@ -198,18 +199,18 @@ function Proveedores() {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="primary" onClick={insertProveedor}>
+          <Button variant="primary" onClick={() =>insertProveedor()}>
             Guardar
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="secondary" onClick={OpenCloseModalInsert}>
+          <Button variant="secondary" onClick={()=>OpenCloseModalInsert()}>
             Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={modalEdit} onHide={OpenCloseModalEdit}>
+      <Modal show={modalEdit} onHide={() =>OpenCloseModalEdit()}>
         <Modal.Header>
           <Modal.Title>Editar Proveedor</Modal.Title>
         </Modal.Header>
@@ -275,13 +276,15 @@ function Proveedores() {
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="secondary" onClick={OpenCloseModalEdit}>
+          <Button variant="secondary" onClick={() =>OpenCloseModalEdit()}>
             Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={modalEliminar} onHide={abrirCerrarModalEliminar}>
+
+
+      <Modal show={modalEliminar} onHide={() =>abrirCerrarModalEliminar()}>
         <Modal.Header>
           <Modal.Title>Eliminar Proveedor</Modal.Title>
         </Modal.Header>
@@ -292,7 +295,7 @@ function Proveedores() {
           <Button variant="danger" onClick={()=>deleteProveedor()}>
             Confirmar
           </Button>
-          <Button variant="secondary" onClick={abrirCerrarModalEliminar}>
+          <Button variant="secondary" onClick={()=>abrirCerrarModalEliminar()}>
             Close
           </Button>
         </Modal.Footer>
