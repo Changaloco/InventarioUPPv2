@@ -39,7 +39,7 @@ const editDepartamento = async () => {
   await axios.put('departamentos/'+departamentoSelected.id_Departamento,departamentoSelected)
   .then((response)=>{
     var dataNueva = departamentos;
-    dataNueva.map((conac)=>{
+    dataNueva.map((departamentos)=>{
       if(departamentoSelected.id_Departamento === departamentos.id_Departamento){
         departamentos.nombreDepartamento= departamentoSelected.nombreDepartamento;
         departamentos.ubicacionDepartamento = departamentoSelected.ubicacionDepartamento;
@@ -54,7 +54,8 @@ const editDepartamento = async () => {
 const deleteDepartameto = async () => {
   await axios.delete("departamentos/"+departamentoSelected.id_Departamento)
   .then((response)=>{
-    setDepartamentos(departamentos.filter(departamento =>departamentos.id_Departamento !== departamentoSelected.id_Departamento));
+    setDepartamentos(departamentos.filter(departamentos =>departamentos.id_Departamento !== departamentoSelected.id_Departamento));
+    setDepartamentoSelected(null);
     OpenCloseModalDelete();
   })
 }
@@ -62,7 +63,7 @@ const deleteDepartameto = async () => {
 useEffect(() => {
   async function fetchData() {
     await axios
-      .get("conac")
+      .get("departamentos")
       .then((response) => {
         setDepartamentos(response.data);
       })
@@ -92,7 +93,7 @@ const OpenCloseModalDelete = () => {
         <Navbar />
         <div className="menu">
           <h1>Departamentos</h1>
-          <Button variant="primary">Nuevo Proyecto</Button>
+          <Button variant="primary" onClick={() =>OpenCloseModalInsert()}>Insertar Nuevo Departamento</Button>
         </div>
         <div>
           <Table striped bordered hover>
@@ -103,10 +104,112 @@ const OpenCloseModalDelete = () => {
                 <th>Ubicacion del departamento</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+            {departamentos.map((departamentos)=>(
+                <tr key={departamentos.id_Departamento}>
+                  <td>{departamentos.id_Departamento}</td>
+                  <td>{departamentos.nombreDepartamento}</td>
+                  <td>{departamentos.ubicacionDepartamento}</td>
+                  <td>
+                  <Button
+                      variant="success"
+                      onClick={()=>selectDepartamento(departamentos,"Editar")}
+                    >
+                      Editar
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button
+                      variant="danger"
+                      onClick={()=>selectDepartamento(departamentos,"Eliminar")}
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
           </Table>
         </div>
       </div>
+
+
+
+      <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Control name="nombreDepartamento" onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Control name="ubicacionDepartamento" onChange={handleChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => insertDepartamento()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={OpenCloseModalInsert}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalEdit} onHide={()=>OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Control name="nombreDepartamento" value={departamentoSelected && departamentoSelected.nombreDepartamento} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Control name="ubicacionDepartamento" value={departamentoSelected && departamentoSelected.ubicacionDepartamento} onChange={handleChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => editDepartamento()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={()=>OpenCloseModalEdit()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalDelete} onHide={()=>OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={()=>deleteDepartameto()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

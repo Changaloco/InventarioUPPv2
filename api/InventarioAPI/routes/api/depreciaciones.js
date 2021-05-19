@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
   });
   
   router.post("/", async (req, res) => {
-    const depreciacion = await Depreciacion.findcreate(req.body);
+    const depreciacion = await Depreciacion.create(req.body);
     res.json(depreciacion);
   });
   

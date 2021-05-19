@@ -5,21 +5,118 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import axios from "axios";
+import { axios } from "../services/axios";
 
 function Depreciacion() {
+  const [modalInsert, setModalInsert] = useState(false);
+  const [modalEdit, setModalEdit] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
+  const [depreciaciones, setDepreciaciones] = useState([]);
+  const [depreciacionSelected, setDepreciacionSelected] = useState({
+    concepto: "",
+    vidaUtil: "",
+    porcentajeDepreciacionAnuall: "",
+    porcentajeDepreciacionMensual: "",
+  });
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setDepreciacionSelected((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  //*funciones axios
+  const insertDepreciacion = async () => {
+    await axios
+      .post("depreciacion", depreciacionSelected)
+      .then(
+        (response) => setDepreciaciones(depreciaciones.concat(response.data)),
+        OpenCloseModalInsert(),
+        setDepreciacionSelected(null)
+      );
+  };
+  const editDepreciacion = async () => {
+    await axios
+      .put(
+        "depreciacion/" + depreciacionSelected.id_CatalogoDepreciacion,
+        depreciacionSelected
+      )
+      .then((response) => {
+        var dataNueva = depreciaciones;
+        dataNueva.map((depreciaciones) => {
+          if (
+            depreciacionSelected.id_CatalogoDepreciacion ===
+            depreciaciones.id_CatalogoDepreciacion
+          ) {
+            depreciaciones.concepto = depreciacionSelected.concepto;
+            depreciaciones.vidaUtil = depreciacionSelected.vidaUtil;
+            depreciaciones.porcentajeDepreciacionAnuall =
+              depreciacionSelected.porcentajeDepreciacionAnuall;
+            depreciaciones.porcentajeDepreciacionMensual =
+              depreciacionSelected.porcentajeDepreciacionMensual;
+          }
+        });
+        setDepreciaciones(dataNueva);
+        setDepreciacionSelected(null);
+        OpenCloseModalEdit();
+      });
+  };
+  const deleteDepreciacion = async () => {
+    await axios
+      .delete("depreciacion/" + depreciacionSelected.id_CatalogoDepreciacion)
+      .then((response) => {
+        setDepreciaciones(
+          depreciaciones.filter(
+            (depreciaciones) =>
+              depreciaciones.id_CatalogoDepreciacion !==
+              depreciacionSelected.id_CatalogoDepreciacion
+          )
+        );
+        setDepreciacionSelected(null);
+        OpenCloseModalDelete();
+      });
+  };
+  //*hook efectos de la pagina
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("depreciacion")
+        .then((response) => {
+          setDepreciaciones(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+  //*Funciones Modales
+  const selectDepreciacion = (depreciacion, caso) => {
+    setDepreciacionSelected(depreciacion);
+    caso === "Editar" ? OpenCloseModalEdit() : OpenCloseModalDelete();
+  };
+  const OpenCloseModalInsert = () => {
+    setModalInsert(!modalInsert);
+  };
+  const OpenCloseModalEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+  const OpenCloseModalDelete = () => {
+    setModalDelete(!modalDelete);
+  };
+
   return (
-    
-    <div>
-      <Navbar/>
-      <div className='menu'>
-      <h1>Catalogo de Depreciacion</h1>
-      <Button variant="primary" >
+    <>
+      <div>
+        <Navbar />
+        <div className="menu">
+          <h1>Catalogo de Depreciacion</h1>
+          <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
             Nuevo Elemento del Catalogo de Depreciacion
           </Button>
-    </div>
-    <div>
-    <Table striped bordered hover>
+        </div>
+        <div>
+          <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Id</th>
@@ -30,11 +127,104 @@ function Depreciacion() {
               </tr>
             </thead>
             <tbody>
-              
+            {depreciaciones.map((depreciaciones)=>(
+                <tr key={depreciaciones.id_CatalogoDepreciacion}>
+                  <td>{depreciaciones.id_CatalogoDepreciacion}</td>
+                  <td>{depreciaciones.concepto}</td>
+                  <td>{depreciaciones.vidaUtil}</td>
+                  <td>{depreciaciones.porcentajeDepreciacionAnuall}</td>
+                  <td>{depreciaciones.porcentajeDepreciacionMensual}</td>
+                  <td>
+                  <Button
+                      variant="success"
+                      onClick={()=>selectDepreciacion(depreciaciones,"Editar")}
+                    >
+                      Editar
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button
+                      variant="danger"
+                      onClick={()=>selectDepreciacion(depreciaciones,"Eliminar")}
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </Table>
-    </div>
-    </div>
+        </div>
+      </div>
+
+      <Modal show={modalInsert} onHide={() => OpenCloseModalInsert()}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Concepto</Form.Label>
+              <Form.Control name="concepto" onChange={handleChange} />
+            </Form.Group>
+            
+            <Form.Group >
+              <Form.Label>Años de vida util.</Form.Label>
+              <Form.Control name="vidaUtil" as="select">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </Form.Control>
+            </Form.Group>
+          
+            <Form.Group>
+              <Form.Label>Depreciacion Anual %</Form.Label>
+              <Form.Control
+                name="porcentajeDepreciacionAnuall"
+                onChange={handleChange}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Depreciacion Mensual %</Form.Label>
+              <Form.Control
+                name="porcentajeDepreciacionMensual"
+                onChange={handleChange}
+              />
+            </Form.Group>
+            
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => insertDepreciacion()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={() => OpenCloseModalInsert()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={modalDelete} onHide={() => OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={() => deleteDepreciacion()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

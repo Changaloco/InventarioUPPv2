@@ -92,7 +92,7 @@ const createToken = (usuario)=>{
     const payload = {
         id_Usuario: usuario.id_Usuario,
         createdAt: moment().unix(),
-        expiredAt: moment().add(10,'minutes').unix()
+        expiredAt: moment().add(50,'minutes').unix()
     }
 
     return jwt.encode(payload,'arriba la octogloriosa');

@@ -38,7 +38,7 @@ function Areas() {
       .put("areas/" + areaSelect.id_Area, areaSelect)
       .then((response) => {
         var dataNueva = areas;
-        dataNueva.map((conac) => {
+        dataNueva.map((areas) => {
           if (areaSelect.id_Area === areas.id_Area) {
             areas.nombreArea = areaSelect.nombreArea;
             areas.ubicacionArea = areaSelect.ubicacionArea;
@@ -51,7 +51,8 @@ function Areas() {
   };
   const deleteArea = async () => {
     await axios.delete("areas/" + areaSelect.id_Area).then((response) => {
-      setAreas(Areas.filter((areas) => areas.id_Area !== areaSelect.id_Area));
+      setAreas(areas.filter((areas) => areas.id_Area !== areaSelect.id_Area));
+      setAreaSelect(null);
       OpenCloseModalDelete();
     });
   };
@@ -85,11 +86,12 @@ function Areas() {
   };
 
   return (
+    <>
     <div>
       <Navbar />
       <div className="menu">
         <h1>Areas</h1>
-        <Button variant="primary">Nuevo Area</Button>
+        <Button variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
       </div>
       <div>
         <Table striped bordered hover>
@@ -100,10 +102,114 @@ function Areas() {
               <th>Ubicacion del Area</th>
             </tr>
           </thead>
-          <tbody></tbody>
+          <tbody>
+          {areas.map((areas)=>(
+                <tr key={areas.id_Area}>
+                  <td>{areas.id_Area}</td>
+                  <td>{areas.nombreArea}</td>
+                  <td>{areas.ubicacionArea}</td>
+                  <td>
+                  <Button
+                      variant="success"
+                      onClick={()=>selectArea(areas,"Editar")}
+                    >
+                      Editar
+                    </Button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <Button
+                      variant="danger"
+                      onClick={()=>selectArea(areas,"Eliminar")}
+                    >
+                      Eliminar
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+
+          </tbody>
         </Table>
       </div>
     </div>
+
+
+
+    <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Control name="nombreArea" onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Control name="ubicacionArea" onChange={handleChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => insertArea()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={OpenCloseModalInsert}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalEdit} onHide={()=>OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group>
+              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Control name="nombreArea" value={areaSelect && areaSelect.nombreArea} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group >
+              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Control name="ubicacionArea" value={areaSelect && areaSelect.ubicacionArea} onChange={handleChange} />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={() => editArea()}>
+            Guardar
+          </Button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Button variant="secondary" onClick={()=>OpenCloseModalEdit()}>
+            Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalDelete} onHide={()=>OpenCloseModalEdit()}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={()=>deleteArea()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
   );
 }
 

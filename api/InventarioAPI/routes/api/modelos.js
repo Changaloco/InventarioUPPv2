@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const modelos = await Modelo.findcreate(req.body);
+  const modelos = await Modelo.create(req.body);
   res.json(modelos);
 });
 

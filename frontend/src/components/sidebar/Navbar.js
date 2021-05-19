@@ -7,6 +7,7 @@ import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
 import useUser from "../../hooks/useUser";
+import Image from 'react-bootstrap/Image';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
@@ -35,6 +36,7 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
+          <Image src="holder.js/200x200" roundedCircle />
           <Link to="/" onClick={handleClick}>
             Cerrar Sesion
           </Link>
