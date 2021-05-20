@@ -42,8 +42,8 @@ function Navbar() {
           </Link>
           <h5 className="user-title">{sessionStorage.userName}  {sessionStorage.userApellido}</h5>
           <Avatar alt="ProfileImage" src={avatarPath} />
-          <Link to="/" onClick={handleClick}>
-            <h7 >CerrarSesion</h7>
+          <Link  to="/" onClick={handleClick}>
+            <h7 style={{textAlign: 'right'}}>CerrarSesion</h7>
           </Link>
         </div>
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
