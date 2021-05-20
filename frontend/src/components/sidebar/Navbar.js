@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation, Redirect } from "react-router-dom";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
@@ -7,30 +7,32 @@ import { SidebarData } from "./SidebarData";
 import "./Navbar.css";
 import { IconContext } from "react-icons";
 import useUser from "../../hooks/useUser";
-import Avatar from '@material-ui/core/Avatar';
+import Avatar from "@material-ui/core/Avatar";
+import { useHistory } from 'react-router-dom';
 
 function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   const { isLoggedIn, logout } = useUser();
+  const history = useHistory();
   const location = useLocation();
-  const avatarPath = "http://localhost:4000/"+ sessionStorage.userFoto ; 
-  
-  
-  useEffect(() => {
-    if (isLoggedIn === false) <Redirect
-    to={{
-      pathname: "/",
-      state: { from: location }
-    }}
-  />
-  }, [isLoggedIn,location]);
+  const avatarPath = "http://localhost:4000/" + sessionStorage.userFoto;
 
+  useEffect(() => {
+    if (isLoggedIn === false)
+      <Redirect
+        to={{
+          pathname: "/",
+          state: { from: location },
+        }}
+      />;
+  }, [isLoggedIn, location]);
 
   const handleClick = (e) => {
     e.preventDefault();
     logout();
-    console.log(!isLoggedIn);
+    history.push('/')
+    
   };
 
   return (
@@ -40,12 +42,18 @@ function Navbar() {
           <Link to="#" className="menu-bars">
             <FaIcons.FaBars onClick={showSidebar} />
           </Link>
-          <h5 className="user-title">{sessionStorage.userName}  {sessionStorage.userApellido}</h5>
+            <Link to={`/user-info/${sessionStorage.userId}`}>
+            <h5 className="user-title">{sessionStorage.userName} {sessionStorage.userApellido}</h5>
+            </Link>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Avatar alt="ProfileImage" src={avatarPath} />
-          <Link  to="/" onClick={handleClick}>
-            <h7 style={{textAlign: 'right'}}>CerrarSesion</h7>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <Link to="/" onClick={handleClick}>
+            <h7 style={{ position:"right" }}>CerrarSesion</h7>
           </Link>
         </div>
+
+
         <nav className={sidebar ? "nav-menu active" : "nav-menu"}>
           <ul className="nav-menu-items" onClick={showSidebar}>
             <li className="navbar-toggle">

@@ -14,6 +14,7 @@ export default function useUser() {
         passwordUsuario,
       }).then((jwt) => {
         window.sessionStorage.setItem('jwt', jwt.jwt);
+        window.sessionStorage.setItem('userId', jwt.usuario.id_Usuario)
         window.sessionStorage.setItem('userFoto', jwt.usuario.fotoUsuario);
         window.sessionStorage.setItem('userName',jwt.usuario.nombreUsuario);
         window.sessionStorage.setItem('userApellido',jwt.usuario.apellidoPUsuario);

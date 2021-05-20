@@ -107,6 +107,7 @@ router.delete('/:id_Usuario',async(req,res)=>{
 });
 
 router.put('/:id_Usuario',async (req,res)=>{
+    req.body.passwordUsuario = bcrypt.hashSync(req.body.passwordUsuario,10);
     await Usuario.update(req.body,{
         where: {id_Usuario: req.params.id_Usuario}
     });
@@ -118,6 +119,14 @@ router.get('/',async(req,res)=>{
     const usuarios = await Usuario.findAll();
     res.json(usuarios);
 });
+
+router.get('/users/:id_Usuario',async(req,res)=>{
+    const usuario = await Usuario.findOne({
+        where:{id_Usuario: req.params.id_Usuario}});
+    res.json(usuario);
+});
+
+
 
 
 module.exports = router;

@@ -91,7 +91,7 @@ function Areas() {
       <Navbar />
       <div className="menu">
         <h1 style={{textAlign: 'center' }}>Areas</h1>
-        <Button  variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
+        <Button style={{}}  variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
       </div>
       <div >
         <Table striped bordered hover variant ="dark">
@@ -136,16 +136,16 @@ function Areas() {
 
     <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title> Insertar Nueva Area</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Label>Nombre Del Area</Form.Label>
               <Form.Control name="nombreArea" onChange={handleChange} />
             </Form.Group>
             <Form.Group >
-              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Label>Ubicacion Del Area</Form.Label>
               <Form.Control name="ubicacionArea" onChange={handleChange} />
             </Form.Group>
           </Form>
@@ -166,16 +166,16 @@ function Areas() {
 
       <Modal show={modalEdit} onHide={()=>OpenCloseModalEdit()}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title>Editar Un Area</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
             <Form.Group>
-              <Form.Label>Nombre Del Departamento</Form.Label>
+              <Form.Label>Nombre Del Area</Form.Label>
               <Form.Control name="nombreArea" value={areaSelect && areaSelect.nombreArea} onChange={handleChange} />
             </Form.Group>
             <Form.Group >
-              <Form.Label>Ubicacion Del Departamento</Form.Label>
+              <Form.Label>Ubicacion Del Area</Form.Label>
               <Form.Control name="ubicacionArea" value={areaSelect && areaSelect.ubicacionArea} onChange={handleChange} />
             </Form.Group>
           </Form>
@@ -196,17 +196,17 @@ function Areas() {
 
       <Modal show={modalDelete} onHide={()=>OpenCloseModalDelete()}>
         <Modal.Header>
-          <Modal.Title>Eliminar Proveedor</Modal.Title>
+          <Modal.Title>Eliminar Area</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Esta seguro de que desea eliminar este proveedor ?
+          Esta seguro de que desea eliminar esta Area?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={()=>deleteArea()}>
             Confirmar
           </Button>
           <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
-            Close
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>

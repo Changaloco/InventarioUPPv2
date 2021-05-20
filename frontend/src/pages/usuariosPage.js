@@ -6,6 +6,7 @@ import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
+import {Link} from "react-router-dom"
 function Usuarios() {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalInsert, setModalInsert] = useState(false);
@@ -194,7 +195,11 @@ function Usuarios() {
               {users.map((usuario) => (
                 <tr key={usuario.id_Usuario}>
                   <td>{usuario.id_Usuario}</td>
-                  <td>{usuario.nombreUsuario}</td>
+                  <td>
+                    <Link to={`/user-info/${usuario.id_Usuario}`}>
+                    {usuario.nombreUsuario}
+                    </Link>
+                  </td>
                   <td>{usuario.apellidoPUsuario}</td>
                   <td>{usuario.apellidoMUsuario}</td>
                   <td>{usuario.matriculaUsuario}</td>

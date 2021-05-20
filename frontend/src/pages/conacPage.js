@@ -188,7 +188,7 @@ function Conac() {
 
       <Modal show={modalDelete} onHide={()=>OpenCloseModalDelete()}>
         <Modal.Header>
-          <Modal.Title>Eliminar Proveedor</Modal.Title>
+          <Modal.Title>Eliminar Clasificacion</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Esta seguro de que desea eliminar esta Clasificacion de CONAC ?

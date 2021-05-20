@@ -19,7 +19,7 @@ import Proveedores from './pages/proveedoresPage';
 import Proyectos from './pages/proyectosPage';
 import Trimestres from './pages/trimestresPage';
 import Usuarios from './pages/usuariosPage';
-
+import Profile from './components/ProfileIndividual/profileIndividual';
 ReactDOM.render(
   <React.StrictMode>
     <UserContextProvider>
@@ -39,6 +39,7 @@ ReactDOM.render(
           <Route path="/proyectos" component={Proyectos} />
           <Route path="/trimestres" component={Trimestres} />
           <Route path="/usuarios" component={Usuarios} />
+          <Route path="/user-info/:id" component={Profile} />
           <Route exact path="/" component={Login} />
         </Switch>
       </BrowserRouter>

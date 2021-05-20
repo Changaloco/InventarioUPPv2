@@ -167,7 +167,7 @@ const OpenCloseModalDelete = () => {
 
       <Modal show={modalEdit} onHide={()=>OpenCloseModalEdit()}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title>Editar  Departamento</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -197,17 +197,17 @@ const OpenCloseModalDelete = () => {
 
       <Modal show={modalDelete} onHide={()=>OpenCloseModalEdit()}>
         <Modal.Header>
-          <Modal.Title>Eliminar Proveedor</Modal.Title>
+          <Modal.Title>Eliminar Departamento</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Esta seguro de que desea eliminar este proveedor ?
+          Esta seguro de que desea eliminar este Departamento ?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={()=>deleteDepartameto()}>
             Confirmar
           </Button>
           <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
-            Close
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
