@@ -150,7 +150,7 @@ function Proyectos() {
 
     <Modal show={modalInsert} onHide={() => OpenCloseModalInsert()}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title>Insertar Un Nuevo Proyecto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -192,10 +192,10 @@ function Proyectos() {
     
     <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
         <Modal.Header>
-          <Modal.Title>Eliminar Proveedor</Modal.Title>
+          <Modal.Title>Eliminar Proyecto</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Esta seguro de que desea eliminar este proveedor ?
+          Esta seguro de que desea eliminar este Proyecto ?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={() => deleteProyecto()}>

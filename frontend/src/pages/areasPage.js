@@ -6,6 +6,7 @@ import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { axios } from "../services/axios";
+import Alert from "react-bootstrap/Alert";
 
 function Areas() {
   const [modalInsert, setModalInsert] = useState(false);
@@ -32,6 +33,10 @@ function Areas() {
         OpenCloseModalInsert(),
         setAreaSelect(null)
       );
+
+    <Alert  variant="success">
+      Se ha insertado esta area con exito!
+    </Alert>;
   };
   const editArea = async () => {
     await axios
@@ -87,54 +92,57 @@ function Areas() {
 
   return (
     <>
-    <div>
-      <Navbar />
-      <div className="menu">
-        <h1 style={{textAlign: 'center' }}>Areas</h1>
-        <Button style={{}}  variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
-      </div>
-      <div >
-        <Table striped bordered hover variant ="dark">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Nombre del Area</th>
-              <th>Ubicacion del Area</th>
-              <th>Funciones</th>
-            </tr>
-          </thead>
-          <tbody>
-          {areas.map((areas)=>(
+      <div>
+        <Navbar />
+        <div className="menu">
+          <h1 style={{ textAlign: "center" }}>Areas</h1>
+          <Button
+            style={{}}
+            variant="primary"
+            onClick={() => OpenCloseModalInsert()}
+          >
+            Nuevo Area
+          </Button>
+        </div>
+        <div>
+          <Table striped bordered hover variant="dark">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Nombre del Area</th>
+                <th>Ubicacion del Area</th>
+                <th>Funciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {areas.map((areas) => (
                 <tr key={areas.id_Area}>
                   <td>{areas.id_Area}</td>
                   <td>{areas.nombreArea}</td>
                   <td>{areas.ubicacionArea}</td>
                   <td>
-                  <Button
+                    <Button
                       variant="success"
-                      onClick={()=>selectArea(areas,"Editar")}
+                      onClick={() => selectArea(areas, "Editar")}
                     >
                       Editar
                     </Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <Button
                       variant="danger"
-                      onClick={()=>selectArea(areas,"Eliminar")}
+                      onClick={() => selectArea(areas, "Eliminar")}
                     >
                       Eliminar
                     </Button>
                   </td>
                 </tr>
               ))}
-
-          </tbody>
-        </Table>
+            </tbody>
+          </Table>
+        </div>
       </div>
-    </div>
 
-
-
-    <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
+      <Modal show={modalInsert} onHide={OpenCloseModalInsert}>
         <Modal.Header>
           <Modal.Title> Insertar Nueva Area</Modal.Title>
         </Modal.Header>
@@ -144,7 +152,7 @@ function Areas() {
               <Form.Label>Nombre Del Area</Form.Label>
               <Form.Control name="nombreArea" onChange={handleChange} />
             </Form.Group>
-            <Form.Group >
+            <Form.Group>
               <Form.Label>Ubicacion Del Area</Form.Label>
               <Form.Control name="ubicacionArea" onChange={handleChange} />
             </Form.Group>
@@ -162,9 +170,7 @@ function Areas() {
         </Modal.Footer>
       </Modal>
 
-
-
-      <Modal show={modalEdit} onHide={()=>OpenCloseModalEdit()}>
+      <Modal show={modalEdit} onHide={() => OpenCloseModalEdit()}>
         <Modal.Header>
           <Modal.Title>Editar Un Area</Modal.Title>
         </Modal.Header>
@@ -172,11 +178,19 @@ function Areas() {
           <Form>
             <Form.Group>
               <Form.Label>Nombre Del Area</Form.Label>
-              <Form.Control name="nombreArea" value={areaSelect && areaSelect.nombreArea} onChange={handleChange} />
+              <Form.Control
+                name="nombreArea"
+                value={areaSelect && areaSelect.nombreArea}
+                onChange={handleChange}
+              />
             </Form.Group>
-            <Form.Group >
+            <Form.Group>
               <Form.Label>Ubicacion Del Area</Form.Label>
-              <Form.Control name="ubicacionArea" value={areaSelect && areaSelect.ubicacionArea} onChange={handleChange} />
+              <Form.Control
+                name="ubicacionArea"
+                value={areaSelect && areaSelect.ubicacionArea}
+                onChange={handleChange}
+              />
             </Form.Group>
           </Form>
         </Modal.Body>
@@ -186,26 +200,22 @@ function Areas() {
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="secondary" onClick={()=>OpenCloseModalEdit()}>
+          <Button variant="secondary" onClick={() => OpenCloseModalEdit()}>
             Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
 
-
-
-      <Modal show={modalDelete} onHide={()=>OpenCloseModalDelete()}>
+      <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
         <Modal.Header>
           <Modal.Title>Eliminar Area</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Esta seguro de que desea eliminar esta Area?
-        </Modal.Body>
+        <Modal.Body>Esta seguro de que desea eliminar esta Area?</Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={()=>deleteArea()}>
+          <Button variant="danger" onClick={() => deleteArea()}>
             Confirmar
           </Button>
-          <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
+          <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
             Cerrar
           </Button>
         </Modal.Footer>

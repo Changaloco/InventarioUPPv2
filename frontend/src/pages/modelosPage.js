@@ -145,7 +145,7 @@ function Modelos() {
 
       <Modal show={modalInsert} onHide={() => OpenCloseModalInsert()}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title>Insertar Un Nuevo Modelo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -177,7 +177,7 @@ function Modelos() {
 
       <Modal show={modalEdit} onHide={() => OpenCloseModalEdit()}>
         <Modal.Header>
-          <Modal.Title>Insertar Un Nuevo Departamento</Modal.Title>
+          <Modal.Title>Editar Modelo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -221,17 +221,17 @@ function Modelos() {
 
       <Modal show={modalDelete} onHide={() => OpenCloseModalEdit()}>
         <Modal.Header>
-          <Modal.Title>Eliminar Proveedor</Modal.Title>
+          <Modal.Title>Eliminar Modelo</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Esta seguro de que desea eliminar este proveedor ?
+          Esta seguro de que desea eliminar este modelo ?
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={() => deleteModelo()}>
             Confirmar
           </Button>
           <Button variant="secondary" onClick={() => OpenCloseModalDelete()}>
-            Close
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
