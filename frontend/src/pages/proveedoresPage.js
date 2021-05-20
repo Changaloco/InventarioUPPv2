@@ -114,7 +114,7 @@ function Proveedores() {
           <Button variant="primary" onClick={OpenCloseModalInsert}>
             Nuevo Proveedor
           </Button>
-          <Table striped bordered hover variant ="dark">
+          <Table responsive="sm" striped bordered hover variant ="dark">
             <thead>
               <tr>
                 <th>Id</th>
