@@ -41,7 +41,7 @@ function Profile(props) {
                 <Image
                   style={{ height: 400, width: 400 }}
                   src={"http://localhost:4000/" + usuario.fotoUsuario}
-                  roundedCircle
+                  rounded 
                 />
               </Col>
               <Col>
