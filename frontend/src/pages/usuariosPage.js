@@ -7,9 +7,13 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import axios from "axios";
 function Usuarios() {
+  const [modalEdit, setModalEdit] = useState(false);
   const [modalInsert, setModalInsert] = useState(false);
+  const [modalDelete, setModalDelete] = useState(false);
   const [image,setImage] = useState([]);
   const [users, setUsuarios] = useState([]);
+  const [departamentos,setDepartamentos] = useState([]);
+  const [areas,setAreas] = useState([]);
   const [userSelected,setUserSelected] = useState({
     nombreUsuario:'',
     apellidoPUsuario:'', 
@@ -39,6 +43,18 @@ function Usuarios() {
     setImage(e.target.files[0]);
     console.log(image)
   }
+
+  const OpenCloseModalDelete = () => {
+    setModalDelete(!modalDelete);
+  };
+  const OpenCloseModalEdit = () => {
+    setModalEdit(!modalEdit);
+  };
+
+  const selectUsuario = (usuario, caso) => {
+    setUserSelected(usuario);
+    caso === "Editar" ? OpenCloseModalEdit() : OpenCloseModalDelete();
+  };
 
   const insertUser=async()=>{
     let formData = new FormData();
@@ -76,8 +92,34 @@ function Usuarios() {
     }
     fetchData();
   }, []);
+  useEffect(() => {
 
+    async function fetchDepartamentos(){
+      await axios
+      .get("http://localhost:4000/api/departamentos")
+      .then((response)=>{
+        setDepartamentos(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+    fetchDepartamentos();
+  },[])
+  useEffect(() => {
 
+    async function fetchAreas(){
+      await axios
+      .get("http://localhost:4000/api/areas")
+      .then((response)=>{
+        setAreas(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
+    fetchAreas();
+  },[])
 
   const OpenCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -120,9 +162,9 @@ function Usuarios() {
                   <td>{usuario.correoUsuario}</td>
                   <td>{usuario.id_Departamento}</td>
                   <td>
-                    <Button variant="success">Success</Button>
+                    <Button onClick={()=>selectUsuario()} variant="success">Editar</Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button variant="danger">Danger</Button>
+                    <Button onClick={()=>selectUsuario()}  variant="danger">Eliminar</Button>
                   </td>
                 </tr>
               ))}
@@ -168,31 +210,28 @@ function Usuarios() {
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Tipo de Usuario</Form.Label>
               <Form.Control as="select" name="tipoUsuario" onChange={handleChange}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>ADMINISTRADOR</option>
+                <option>INVITADO</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Perfil Academico</Form.Label>
               <Form.Control as="select" name="perfilAcademicoUsuario" onChange={handleChange}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>Doctorado en Ciencias en Biotecnología</option>
+                <option>Licenciatura en Ciencias de la Comunicación</option>
+                <option>Licenciatura en Ciencias</option>
+                <option>Ingenieria en Sistemas Computacionales</option>
+                <option>Ingenieria en Software</option>
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label>Puesto de Usuario</Form.Label>
               <Form.Control as="select" name="puestoUsuario" onChange={handleChange}>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+                <option>PROFESOR INVESTIGADOR TITULAR A</option>
+                <option>PROFESOR INVESTIGADOR TITULAR B</option>
+                <option>DIRECTOR DE ÁREA</option>
+                <option>DIRECTOR DE CARRERA</option>
+                <option>ADMINISTRATIVO</option>
               </Form.Control>
             </Form.Group>
             <Form.Group>
@@ -209,21 +248,17 @@ function Usuarios() {
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label >Departamento</Form.Label>
               <Form.Control name="id_Departamento" onChange={handleChange} as="select">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
+              {departamentos.map((departamentos) => (
+                <option value={departamentos.id_Departamento}>{departamentos.nombreDepartamento}</option>
+              ))}
               </Form.Control>
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
                 <Form.Label>Area</Form.Label>
                 <Form.Control name="id_Area" onChange={handleChange} as="select">
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5</option>
+                {areas.map((areas) => (
+                <option value={areas.id_Area}>{areas.nombreArea}</option>
+              ))}
                 </Form.Control>
               </Form.Group>
           </Form>
@@ -232,6 +267,25 @@ function Usuarios() {
           <Button variant="primary" onClick={insertUser}>Save Changes</Button>
           <Button variant="secondary" onClick={OpenCloseModalInsert}>
             Cerrar
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+      <Modal show={modalDelete} onHide={()=>OpenCloseModalDelete()}>
+        <Modal.Header>
+          <Modal.Title>Eliminar Proveedor</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Esta seguro de que desea eliminar este proveedor ?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={()=>OpenCloseModalDelete()}>
+            Confirmar
+          </Button>
+          <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
+            Close
           </Button>
         </Modal.Footer>
       </Modal>

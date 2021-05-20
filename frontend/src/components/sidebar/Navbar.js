@@ -15,8 +15,10 @@ function Navbar() {
   const { isLoggedIn, logout } = useUser();
   const location = useLocation();
   const avatarPath = "http://localhost:4000/"+ sessionStorage.userFoto ; 
+  
+  
   useEffect(() => {
-    if (!isLoggedIn) <Redirect
+    if (isLoggedIn === false) <Redirect
     to={{
       pathname: "/",
       state: { from: location }
@@ -24,9 +26,11 @@ function Navbar() {
   />
   }, [isLoggedIn,location]);
 
+
   const handleClick = (e) => {
     e.preventDefault();
     logout();
+    console.log(!isLoggedIn);
   };
 
   return (

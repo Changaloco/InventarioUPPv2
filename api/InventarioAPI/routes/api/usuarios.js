@@ -99,6 +99,14 @@ const createToken = (usuario)=>{
 
 }
 
+router.delete('/:id_Usuario',async(req,res)=>{
+    await Usuario.destroy({
+        where: {id_Usuario: req.params.id_Usuario}
+    });
+    res.json({sucess:'Usuario Eliminado con Exito'});
+});
+
+
 
 router.get('/',async(req,res)=>{
     const usuarios = await Usuario.findAll();
