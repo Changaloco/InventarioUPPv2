@@ -106,6 +106,12 @@ router.delete('/:id_Usuario',async(req,res)=>{
     res.json({sucess:'Usuario Eliminado con Exito'});
 });
 
+router.put('/:id_Usuario',async (req,res)=>{
+    await Usuario.update(req.body,{
+        where: {id_Usuario: req.params.id_Usuario}
+    });
+    res.json({sucess:'trimestre actualizado con exito'});
+});
 
 
 router.get('/',async(req,res)=>{
