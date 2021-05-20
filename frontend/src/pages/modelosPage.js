@@ -104,13 +104,14 @@ function Modelos() {
           </Button>
         </div>
         <div>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Marca </th>
                 <th>SubMarca</th>
                 <th>Modelo</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>
