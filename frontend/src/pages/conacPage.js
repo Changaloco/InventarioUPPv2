@@ -99,7 +99,7 @@ function Conac() {
         <div className="menu">
           <h1 style={{textAlign: 'center'}}>CONAC</h1>
           <Button variant="primary" onClick={OpenCloseModalInsert}>
-            Nueva Clasificacion de conac
+            Nueva Clasificacion de CONAC
           </Button>
         </div>
         <div>
@@ -107,11 +107,11 @@ function Conac() {
             <thead>
               <tr>
                 <th>ID</th>
-                <th>Nombre de Clasificacion</th>
+                <th>Nombre de Clasificación</th>
                 <th>Grupo de Bienes</th>
                 <th>Categoria</th>
                 <th>SubCategoria</th>
-                <th>Descripcion</th>
+                <th>Descripción</th>
                 <th>Funciones</th>
               </tr>
             </thead>

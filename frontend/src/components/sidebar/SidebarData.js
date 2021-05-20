@@ -8,7 +8,7 @@ import * as IoIcons from 'react-icons/io';
 
 export const SidebarData = [
   {
-    title: 'Menu',
+    title: 'Menú',
     path: '/menu',
     icon: <AiIcons.AiFillHome />,
     cName: 'nav-text'
@@ -56,13 +56,13 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'trimestres',
+    title: 'Trimestres',
     path: '/trimestres',
     icon: <AiIcons.AiFillCalendar />,
     cName: 'nav-text'
   },
   {
-    title: 'Catalogo Depreciacion',
+    title: 'Catalogo Depreciación',
     path: '/depreciacion',
     icon: <AiIcons.AiFillCalculator />,
     cName: 'nav-text'

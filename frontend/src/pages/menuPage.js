@@ -10,7 +10,7 @@ function Menu() {
       <div>
         <Navbar />
         <div>
-          <h1 style={{ textAlign: "center" }}>Menu</h1>
+          <h1 style={{ textAlign: "center" }}>Menú</h1>
         </div>
         <div>
           <Jumbotron>
