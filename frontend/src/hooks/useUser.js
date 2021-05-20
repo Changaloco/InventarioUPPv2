@@ -21,14 +21,14 @@ export default function useUser() {
         setJWT("jwt");
       })
       .catch((err,jwt) => {
-        window.sessionStorage.removeItem('jwt', jwt.jwt);
+        window.sessionStorage.clear();
         setState({loading: false, error:true});
         console.error(err)
       })
     },[setJWT])
 
   const logout = useCallback(() => {
-    window.sessionStorage.removeItem('jwt', jwt.jwt);
+    window.sessionStorage.clear();
     setJWT(null);
   }, [setJWT]);
 

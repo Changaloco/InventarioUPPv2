@@ -5,10 +5,10 @@ import Button from "react-bootstrap/Button";
 import Table from "react-bootstrap/Table";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import FormFile from 'react-bootstrap/FormFile'
 import axios from "axios";
 function Usuarios() {
   const [modalInsert, setModalInsert] = useState(false);
+  const [image,setImage] = useState([]);
   const [users, setUsuarios] = useState([]);
   const [userSelected,setUserSelected] = useState({
     nombreUsuario:'',
@@ -20,7 +20,6 @@ function Usuarios() {
     correoUsuario:'',
     perfilAcademicoUsuario:'',
     puestoUsuario:'',
-    image:'',
     estatusLaboralUsuario:'',
     id_Departamento:'',
     id_Area:''
@@ -32,18 +31,38 @@ function Usuarios() {
       ...prevState,
       [name]:value
     }))
+    
     console.log(userSelected);
   }
 
-
+  const uploadImage=e=>{
+    setImage(e.target.files[0]);
+    console.log(image)
+  }
 
   const insertUser=async()=>{
-    await axios.post('http://localhost:4000/api/usuarios/register',userSelected)
+    let formData = new FormData();
+    formData.append('image',image);
+    formData.append('nombreUsuario',userSelected.nombreUsuario);
+    formData.append('apellidoPUsuario',userSelected.apellidoPUsuario);
+    formData.append('apellidoMUsuario' , userSelected.apellidoMUsuario);
+    formData.append('matriculaUsuario', userSelected.matriculaUsuario);
+    formData.append('tipoUsuario' , userSelected.tipoUsuario);
+    formData.append('passwordUsuario' , userSelected.passwordUsuario);
+    formData.append('correoUsuario' , userSelected.correoUsuario);
+    formData.append('perfilAcademicoUsuario' , userSelected.perfilAcademicoUsuario);
+    formData.append('puestoUsuario' , userSelected.puestoUsuario);
+    formData.append('estatusLaboralUsuario', userSelected.estatusLaboralUsuario);
+    formData.append('id_Departamento' , userSelected.id_Departamento);
+    formData.append('id_Area' , userSelected.id_Area);
+    console.log(formData);
+    await axios.post('http://localhost:4000/api/usuarios/register',formData)
     .then(response=>
       setUsuarios(users.concat(response.data)), 
       OpenCloseModalInsert()
       )
   }
+
   useEffect(() => {
     async function fetchData() {
       await axios
@@ -57,6 +76,8 @@ function Usuarios() {
     }
     fetchData();
   }, []);
+
+
 
   const OpenCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -176,11 +197,11 @@ function Usuarios() {
             </Form.Group>
             <Form.Group>
               <Form.Label>Fotografia</Form.Label>
-              <Form.File name="image" onChange={handleChange}  />
+              <Form.File name="image" onChange={uploadImage}  />
             </Form.Group>
             <Form.Group controlId="exampleForm.ControlSelect1">
               <Form.Label >Estatus Laboral</Form.Label>
-              <Form.Control as="select">
+              <Form.Control name="estatusLaboralUsuario" onChange={handleChange} as="select">
                 <option>Activo</option>
                 <option>Inactivo</option>
               </Form.Control>
