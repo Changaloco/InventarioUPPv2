@@ -11,6 +11,7 @@ import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import useUser from "../../hooks/useUser";
+import Spinner from 'react-bootstrap/Spinner'
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -53,7 +54,26 @@ export default function SignIn() {
 
   return (
     <>
-    {isLoginLoading && <strong>Verificando Usuario, Espere...</strong>}
+    {isLoginLoading && <div> <Button variant="primary" disabled>
+    <Spinner
+      as="span"
+      animation="border"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />
+    <span className="sr-only">Loading...</span>
+  </Button>{' '}
+  <Button variant="primary" disabled>
+    <Spinner
+      as="span"
+      animation="grow"
+      size="sm"
+      role="status"
+      aria-hidden="true"
+    />
+    Loading...
+  </Button></div> }
     {!isLoginLoading &&
     <Container component="main" maxWidth="xs">
       <CssBaseline />
