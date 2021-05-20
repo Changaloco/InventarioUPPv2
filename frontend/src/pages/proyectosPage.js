@@ -97,7 +97,7 @@ function Proyectos() {
     <div>
       <Navbar/>
       <div className='menu'>
-      <h1>Proyectos</h1>
+      <h1 style={{textAlign: 'center'}}>Proyectos</h1>
 
       <Button variant="primary" onClick={()=>OpenCloseModalInsert()} >
             Nuevo Proyecto

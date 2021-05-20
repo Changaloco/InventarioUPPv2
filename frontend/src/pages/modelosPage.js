@@ -98,7 +98,7 @@ function Modelos() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1>Modelos</h1>
+          <h1 style={{textAlign: 'center'}}>Modelos</h1>
           <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
             Nuevo Modelo
           </Button>

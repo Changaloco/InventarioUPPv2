@@ -15,7 +15,7 @@ function Menu() {
     <div>
       
       <div className='menu'>
-      <h1>Menu</h1>
+      <h1 style={{textAlign: 'center'}}>Menu</h1>
       
     </div>
 

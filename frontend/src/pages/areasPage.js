@@ -90,7 +90,7 @@ function Areas() {
     <div>
       <Navbar />
       <div className="menu">
-        <h1>Areas</h1>
+        <h1 style={{textAlign: 'center'}}>Areas</h1>
         <Button variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
       </div>
       <div>

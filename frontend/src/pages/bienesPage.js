@@ -140,7 +140,7 @@ function Bienes() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1>Bienes</h1>
+          <h1 style={{textAlign: 'center'}}>Bienes</h1>
           <div>
             <Button onClick={OpenCloseModalInsert} variant="primary">Agregar Usuario</Button>
           </div>
