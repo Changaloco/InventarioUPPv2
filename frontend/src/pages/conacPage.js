@@ -97,7 +97,7 @@ function Conac() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1 style={{color: "red"}}>CONAC</h1>
+          <h1 style={{textAlign: 'center'}}>CONAC</h1>
           <Button variant="primary" onClick={OpenCloseModalInsert}>
             Nueva Clasificacion de conac
           </Button>
