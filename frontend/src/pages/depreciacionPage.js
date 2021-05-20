@@ -124,6 +124,7 @@ function Depreciacion() {
                 <th>Tiempo de vida Util en Años</th>
                 <th>Porcentaje de Depreciacion Anual</th>
                 <th>Porcentaje de Depreciacion Mensual</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

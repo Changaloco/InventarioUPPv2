@@ -100,6 +100,7 @@ function Areas() {
               <th>ID</th>
               <th>Nombre del Area</th>
               <th>Ubicacion del Area</th>
+              <th>Funciones</th>
             </tr>
           </thead>
           <tbody>

@@ -146,7 +146,7 @@ function Usuarios() {
                 <th>Perfil Academico</th>
                 <th>Correo Electronico</th>
                 <th>Departamento</th>
-                <th>Operaciones</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

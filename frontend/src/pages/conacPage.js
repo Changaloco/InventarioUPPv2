@@ -111,7 +111,8 @@ function Conac() {
                 <th>Grupo de Bienes</th>
                 <th>Categoria</th>
                 <th>SubCategoria</th>
-                <th>Descripcion.</th>
+                <th>Descripcion</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

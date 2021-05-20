@@ -113,6 +113,7 @@ function Proyectos() {
                 <th>Partida Presupuestal</th>
                 <th>Fuente de Financiamiento</th>
                 <th>Numero de la cuenta</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

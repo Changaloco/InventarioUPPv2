@@ -102,6 +102,7 @@ const OpenCloseModalDelete = () => {
                 <th>ID</th>
                 <th>Nombre del Departamento</th>
                 <th>Ubicacion del departamento</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

@@ -96,6 +96,7 @@ function Bienes() {
               <th>Numero de Resguardo</th>
               <th>Tipo de bien</th>
               <th>Clave de control</th>
+              <th>Funciones</th>
             </tr>
           </thead>
           <tbody>

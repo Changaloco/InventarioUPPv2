@@ -111,6 +111,7 @@ function Modelos() {
                 <th>Marca </th>
                 <th>SubMarca</th>
                 <th>Modelo</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>

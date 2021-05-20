@@ -115,6 +115,7 @@ function Trimestres() {
                 <th>Fecha de Comienzo</th>
                 <th>Fecha de Finalizacion</th>
                 <th>Numero de trimestre Correspondiente</th>
+                <th>Funciones</th>
               </tr>
             </thead>
             <tbody>
