@@ -110,7 +110,7 @@ function Depreciacion() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1 style={{textAlign: 'center'}}>Catalogo de Depreciacion</h1>
+          <h1 style={{textAlign: 'center'}}>Catalogo de Depreciación</h1>
           <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
             Nuevo Elemento del Catalogo de Depreciación
           </Button>
