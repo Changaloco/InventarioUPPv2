@@ -171,7 +171,7 @@ function Usuarios() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1>Usuarios</h1>
+          <h1 style={{textAlign: 'center'}}>Usuarios</h1>
           <Button variant="primary" onClick={OpenCloseModalInsert}>
             Agregar Usuario
           </Button>

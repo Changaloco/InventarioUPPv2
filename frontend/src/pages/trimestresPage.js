@@ -101,7 +101,7 @@ function Trimestres() {
       <div>
         <Navbar />
         <div className="menu">
-          <h1>Trimestres</h1>
+          <h1 style={{textAlign: 'center'}}>Trimestres</h1>
           <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
             Nuevo Trimestre Agregado
           </Button>

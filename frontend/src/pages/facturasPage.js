@@ -13,7 +13,7 @@ function Facturas() {
     <div>
       <Navbar/>
       <div className='menu'>
-      <h1>Facturas</h1>
+      <h1 style={{textAlign: 'center'}}>Facturas</h1>
     </div>
     <div>
       

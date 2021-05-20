@@ -92,7 +92,7 @@ const OpenCloseModalDelete = () => {
       <div>
         <Navbar />
         <div className="menu">
-          <h1>Departamentos</h1>
+          <h1 style={{textAlign: 'center'}}>Departamentos</h1>
           <Button variant="primary" onClick={() =>OpenCloseModalInsert()}>Insertar Nuevo Departamento</Button>
         </div>
         <div>
