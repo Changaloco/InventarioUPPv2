@@ -90,10 +90,10 @@ function Areas() {
     <div>
       <Navbar />
       <div className="menu">
-        <h1 style={{textAlign: 'center'}}>Areas</h1>
-        <Button variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
+        <h1 style={{textAlign: 'center' }}>Areas</h1>
+        <Button  variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
       </div>
-      <div>
+      <div >
         <Table striped bordered hover variant ="dark">
           <thead>
             <tr>
