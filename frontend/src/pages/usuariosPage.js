@@ -29,6 +29,33 @@ function Usuarios() {
     id_Area:''
   });
 
+
+  const editUser = async () => {
+    await axios
+      .put("http://localhost:4000/api/usuarios/" + userSelected.id_Usuario, userSelected)
+      .then((response) => {
+        var dataNueva = users;
+        dataNueva.map((users) => {
+          if (userSelected.id_Usuario === users.id_Usuario) {
+            users.nombreUsuario = userSelected.nombreUsuario;
+            users.apellidoMUsuario = userSelected.apellidoMUsuario;
+            users.apellidoPUsuario = userSelected.apellidoPUsuario;
+            users.matriculaUsuario = userSelected.matriculaUsuario;
+            users.tipoUsuario = userSelected.tipoUsuario;
+            users.passwordUsuario = userSelected.passwordUsuario;
+            users.correoUsuario = userSelected.correoUsuario;
+            users.perfilAcademicoUsuario = userSelected.perfilAcademicoUsuario;
+            users.puestoUsuario = userSelected.puestoUsuario;
+            users.estatusLaboralUsuario = userSelected.estatusLaboralUsuario;
+            users.id_Departamento = userSelected.id_Departamento;
+            users.id_Area = userSelected.id_Area;
+          }
+        });
+        setUsuarios(dataNueva);
+        setUserSelected(null);
+        OpenCloseModalEdit();
+      });
+  };
   const handleChange=e=>{
     const{name,value}=e.target;
     setUserSelected(prevState=>({
@@ -121,9 +148,23 @@ function Usuarios() {
     fetchAreas();
   },[])
 
+
+
   const OpenCloseModalInsert = () => {
     setModalInsert(!modalInsert);
   };
+
+  
+  
+  const deleteUser = async () => {
+    await axios.delete("http://localhost:4000/api/usuarios/" + userSelected.id_Usuario).then((response) => {
+      setUsuarios(users.filter((users) => users.id_Usuario !== userSelected.id_Usuario));
+      setUserSelected(null);
+      OpenCloseModalDelete();
+    });
+  }
+
+
 
   return (
     <>
@@ -162,9 +203,9 @@ function Usuarios() {
                   <td>{usuario.correoUsuario}</td>
                   <td>{usuario.id_Departamento}</td>
                   <td>
-                    <Button onClick={()=>selectUsuario()} variant="success">Editar</Button>
+                    <Button onClick={()=>selectUsuario(usuario,"Editar")} variant="success">Editar</Button>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                    <Button onClick={()=>selectUsuario()}  variant="danger">Eliminar</Button>
+                    <Button onClick={()=>selectUsuario(usuario,"Eliminar")}  variant="danger">Eliminar</Button>
                   </td>
                 </tr>
               ))}
@@ -281,11 +322,107 @@ function Usuarios() {
           Esta seguro de que desea eliminar este proveedor ?
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={()=>OpenCloseModalDelete()}>
+          <Button variant="danger" onClick={()=>deleteUser()}>
             Confirmar
           </Button>
           <Button variant="secondary" onClick={()=>OpenCloseModalDelete()}>
             Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+
+
+
+      <Modal show={modalEdit} onHide={OpenCloseModalEdit}>
+        <Modal.Header>
+          <Modal.Title>Insertar Usuario</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group >
+              <Form.Label>Nombre</Form.Label>
+              <Form.Control name="nombreUsuario" value={userSelected && userSelected.nombreUsuario} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Apellido Paterno </Form.Label>
+              <Form.Control name="apellidoPUsuario" value={userSelected && userSelected.apellidoPUsuario} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Apellido Materno</Form.Label>
+              <Form.Control name="apellidoMUsuario" value={userSelected && userSelected.apellidoMUsuario} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlInput1">
+              <Form.Label>Matricula Universidad</Form.Label>
+              <Form.Control name="matriculaUsuario" value={userSelected && userSelected.matriculaUsuario} onChange={handleChange} />
+            </Form.Group>
+            <Form.Group controlId="formBasicEmail">
+              <Form.Label>Correo Electronico</Form.Label>
+              <Form.Control type="email" name="correoUsuario" value={userSelected && userSelected.correoUsuario} onChange={handleChange} />
+              <Form.Text className="text-muted">
+                Usa tu correo de la universidad!
+              </Form.Text>
+            </Form.Group>
+            <Form.Group controlId="formBasicPassword">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control type="password" placeholder="Password" value={userSelected && userSelected.passwordUsuario} name="passwordUsuario" onChange={handleChange} />
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Tipo de Usuario</Form.Label>
+              <Form.Control as="select" name="tipoUsuario" value={userSelected && userSelected.tipoUsuario} onChange={handleChange}>
+                <option>ADMINISTRADOR</option>
+                <option>INVITADO</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Perfil Academico</Form.Label>
+              <Form.Control as="select" name="perfilAcademicoUsuario" value={userSelected && userSelected.perfilAcademicoUsuario} onChange={handleChange}>
+                <option>Doctorado en Ciencias en Biotecnología</option>
+                <option>Licenciatura en Ciencias de la Comunicación</option>
+                <option>Licenciatura en Ciencias</option>
+                <option>Ingenieria en Sistemas Computacionales</option>
+                <option>Ingenieria en Software</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label>Puesto de Usuario</Form.Label>
+              <Form.Control as="select" name="puestoUsuario" value={userSelected && userSelected.puestoUsuario} onChange={handleChange}>
+                <option>PROFESOR INVESTIGADOR TITULAR A</option>
+                <option>PROFESOR INVESTIGADOR TITULAR B</option>
+                <option>DIRECTOR DE ÁREA</option>
+                <option>DIRECTOR DE CARRERA</option>
+                <option>ADMINISTRATIVO</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label >Estatus Laboral</Form.Label>
+              <Form.Control name="estatusLaboralUsuario" value={userSelected && userSelected.estatusLaboralUsuario} onChange={handleChange} as="select">
+                <option>Activo</option>
+                <option>Inactivo</option>
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+              <Form.Label >Departamento</Form.Label>
+              <Form.Control name="id_Departamento" onChange={handleChange} value={userSelected && userSelected.id_Departamento} as="select">
+              {departamentos.map((departamentos) => (
+                <option value={departamentos.id_Departamento}>{departamentos.nombreDepartamento}</option>
+              ))}
+              </Form.Control>
+            </Form.Group>
+            <Form.Group controlId="exampleForm.ControlSelect1">
+                <Form.Label>Area</Form.Label>
+                <Form.Control name="id_Area" onChange={handleChange} value={userSelected && userSelected.id_Area} as="select">
+                {areas.map((areas) => (
+                <option value={areas.id_Area}>{areas.nombreArea}</option>
+              ))}
+                </Form.Control>
+              </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={()=>editUser()}>Save Changes</Button>
+          <Button variant="secondary" onClick={OpenCloseModalEdit}>
+            Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
