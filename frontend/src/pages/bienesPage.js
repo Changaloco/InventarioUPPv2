@@ -12,6 +12,10 @@ function Bienes() {
   const [modalEdit, setModalEdit] = useState(false);
   const [modalDelete, setModalDelete] = useState(false);
   const [bienes, setBienes] = useState([]);
+  const [conac, setConac] = useState([]);
+  const [departamentos,setDepartamentos] = useState([]);
+  const [depreciacion, setDepreciacion] = useState([]);
+  const [modelo,setModelo] = useState([]);
   const [bienSelected, setBienSelected] = useState({
     nombreBien: "",
     descripcionBien: "",
@@ -63,6 +67,64 @@ function Bienes() {
     }
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("conac")
+        .then((response) => {
+          setConac(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("departamentos")
+        .then((response) => {
+          setDepartamentos(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("depreciacion")
+        .then((response) => {
+          setDepreciacion(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      await axios
+        .get("modelos")
+        .then((response) => {
+          setModelo(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    fetchData();
+  }, []);
+
 
   const OpenCloseModalInsert = () => {
     setModalInsert(!modalInsert);
@@ -227,8 +289,9 @@ function Bienes() {
             <Form.Group >
               <Form.Label>Departamento</Form.Label>
               <Form.Control as="select" name="id_Departamento" onChange={handleChange}>
-                <option>1</option>
-                <option>No</option>
+              {departamentos.map((departamentos) => (
+                <option value={departamentos.id_Departamento}>{departamentos.nombreDepartamento}</option>
+              ))}
               </Form.Control>
             </Form.Group>
 
@@ -250,8 +313,9 @@ function Bienes() {
             <Form.Group >
               <Form.Label>Modelo</Form.Label>
               <Form.Control as="select" name="puestoUsuario" onChange={handleChange}>
-                <option>Si</option>
-                <option>No</option>
+              {modelo.map((modelo) => (
+                <option value={modelo.id_Modelo}>Marca: {modelo.marca} Submarca: {modelo.submarca} Modelo: {modelo.modelo}</option>
+              ))}
               </Form.Control>
             </Form.Group>
 
