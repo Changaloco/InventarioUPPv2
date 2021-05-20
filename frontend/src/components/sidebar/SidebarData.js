@@ -26,12 +26,6 @@ export const SidebarData = [
     cName: 'nav-text'
   },
   {
-    title: 'Facturas',
-    path: '/facturas',
-    icon: <AiIcons.AiFillRead />,
-    cName: 'nav-text'
-  },
-  {
     title: 'Proveedores',
     path: '/proveedores',
     icon: <IoIcons.IoMdBriefcase />,

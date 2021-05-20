@@ -28,5 +28,10 @@ router.delete('/:id_Area',async(req,res)=>{
     res.json({sucess:'Area Eliminada con Exito'});
 });
 
+router.get('/area/:id_Area',async(req,res)=>{
+    const areas = await Area.findOne({
+        where:{id_Area: req.params.id_Area}});
+    res.json(areas);
+});
 
 module.exports = router;

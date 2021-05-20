@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "../components/sidebar/Navbar";
-import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import { Link } from "react-router-dom";

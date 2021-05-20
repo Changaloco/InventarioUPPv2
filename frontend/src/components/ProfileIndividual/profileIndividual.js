@@ -1,8 +1,7 @@
-import React, { Component } from "react";
+import React from "react";
 import Navbar from "../sidebar/Navbar";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Media from "react-bootstrap/Media";
 import { axios } from "../../services/axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Container from "react-bootstrap/Container";
@@ -13,7 +12,7 @@ import Image from "react-bootstrap/Image";
 function Profile(props) {
   const { id } = useParams();
   const [usuario, setUsuario] = useState([]);
-
+  const [departamento, setDepartamento] = useState([]);
   useEffect(() => {
     async function fetchData() {
       await axios
@@ -28,6 +27,7 @@ function Profile(props) {
     fetchData();
   }, []);
 
+  
   return (
     <>
       <div>
