@@ -116,10 +116,10 @@ function Depreciacion() {
           </Button>
         </div>
         <div>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Concepto</th>
                 <th>Tiempo de vida Util en Años</th>
                 <th>Porcentaje de Depreciacion Anual</th>

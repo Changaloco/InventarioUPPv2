@@ -94,10 +94,10 @@ function Areas() {
         <Button variant="primary" onClick={()=>OpenCloseModalInsert()}>Nuevo Area</Button>
       </div>
       <div>
-        <Table striped bordered hover>
+        <Table striped bordered hover variant ="dark">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>ID</th>
               <th>Nombre del Area</th>
               <th>Ubicacion del Area</th>
             </tr>

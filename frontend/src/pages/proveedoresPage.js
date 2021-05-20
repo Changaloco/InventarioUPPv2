@@ -117,7 +117,7 @@ function Proveedores() {
           <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre del Proveedor</th>
                 <th>RFC</th>
                 <th>Domicilio Fiscal</th>

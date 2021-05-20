@@ -96,10 +96,10 @@ const OpenCloseModalDelete = () => {
           <Button variant="primary" onClick={() =>OpenCloseModalInsert()}>Insertar Nuevo Departamento</Button>
         </div>
         <div>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre del Departamento</th>
                 <th>Ubicacion del departamento</th>
               </tr>

@@ -107,10 +107,10 @@ function Trimestres() {
           </Button>
         </div>
         <div>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Ejercicio Fiscal</th>
                 <th>Fecha de Comienzo</th>
                 <th>Fecha de Finalizacion</th>

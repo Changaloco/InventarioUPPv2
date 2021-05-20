@@ -103,10 +103,10 @@ function Conac() {
           </Button>
         </div>
         <div>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre de Clasificacion</th>
                 <th>Grupo de Bienes</th>
                 <th>Categoria</th>

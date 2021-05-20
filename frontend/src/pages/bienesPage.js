@@ -83,10 +83,10 @@ function Bienes() {
             <Button onClick={OpenCloseModalInsert} variant="primary">Agregar Usuario</Button>
           </div>
         </div>
-        <Table striped bordered hover>
+        <Table striped bordered hover variant ="dark">
           <thead>
             <tr>
-              <th>Id</th>
+              <th>ID</th>
               <th>Nombre del Bien</th>
               <th>Descripcion</th>
               <th>Numero Inventario Armonizado</th>

@@ -134,10 +134,10 @@ function Usuarios() {
           <Button variant="primary" onClick={OpenCloseModalInsert}>
             Agregar Usuario
           </Button>
-          <Table striped bordered hover>
+          <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Nombre</th>
                 <th>Apellido Paterno</th>
                 <th>Apellido Materno</th>

@@ -104,10 +104,10 @@ function Proyectos() {
           </Button>
     </div>
     <div>
-    <Table striped bordered hover>
+    <Table striped bordered hover variant ="dark">
             <thead>
               <tr>
-                <th>Id</th>
+                <th>ID</th>
                 <th>Clave Proyecto</th>
                 <th>Nombre Proyecto</th>
                 <th>Partida Presupuestal</th>
