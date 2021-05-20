@@ -112,7 +112,7 @@ function Depreciacion() {
         <div className="menu">
           <h1 style={{textAlign: 'center'}}>Catalogo de Depreciacion</h1>
           <Button variant="primary" onClick={() => OpenCloseModalInsert()}>
-            Nuevo Elemento del Catalogo de Depreciacion
+            Nuevo Elemento del Catalogo de Depreciación
           </Button>
         </div>
         <div>
@@ -122,8 +122,8 @@ function Depreciacion() {
                 <th>ID</th>
                 <th>Concepto</th>
                 <th>Tiempo de vida Util en Años</th>
-                <th>Porcentaje de Depreciacion Anual</th>
-                <th>Porcentaje de Depreciacion Mensual</th>
+                <th>Porcentaje de Depreciación Anual</th>
+                <th>Porcentaje de Depreciación Mensual</th>
                 <th>Funciones</th>
               </tr>
             </thead>

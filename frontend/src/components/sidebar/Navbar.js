@@ -49,7 +49,7 @@ function Navbar() {
           <Avatar alt="ProfileImage" src={avatarPath} />
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <Link to="/" onClick={handleClick}>
-            <h7 style={{ position:"right" }}>CerrarSesion</h7>
+            <h7 style={{ position:"right" }}>Cerrar Sesion</h7>
           </Link>
         </div>
 

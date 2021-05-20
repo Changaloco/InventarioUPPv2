@@ -113,7 +113,7 @@ function Trimestres() {
                 <th>ID</th>
                 <th>Ejercicio Fiscal</th>
                 <th>Fecha de Comienzo</th>
-                <th>Fecha de Finalizacion</th>
+                <th>Fecha de Finalización</th>
                 <th>Numero de trimestre Correspondiente</th>
                 <th>Funciones</th>
               </tr>
