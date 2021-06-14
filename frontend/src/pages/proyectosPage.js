@@ -184,12 +184,13 @@ function Proyectos() {
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <Button variant="secondary" onClick={OpenCloseModalInsert}>
+          <Button variant="secondary" onClick={() => OpenCloseModalInsert()}>
             Cerrar
           </Button>
         </Modal.Footer>
       </Modal>
     
+
     <Modal show={modalDelete} onHide={() => OpenCloseModalDelete()}>
         <Modal.Header>
           <Modal.Title>Eliminar Proyecto</Modal.Title>

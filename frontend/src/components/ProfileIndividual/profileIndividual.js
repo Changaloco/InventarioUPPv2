@@ -13,7 +13,10 @@ function Profile(props) {
   const { id } = useParams();
   const [usuario, setUsuario] = useState([]);
   const [departamento, setDepartamento] = useState([]);
+  const [area, setArea] = useState([]);
+
   useEffect(() => {
+    console.log(usuario);
     async function fetchData() {
       await axios
         .get("usuarios/users/" + id)
@@ -25,23 +28,37 @@ function Profile(props) {
         });
     }
     fetchData();
-  }, []);
+  }, [id]);
 
-  
+  const fetchDepartamento = async () => {
+    if (usuario === []) {
+      console.log("no ejecutar");
+    } else {
+      console.log(usuario);
+      await axios
+        .get("departamentos/departamento/" + usuario.id_Departamento)
+        .then((response) => {
+          setDepartamento(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  };
+
   return (
     <>
       <div>
         <Navbar />
         <div>
           <h1 style={{ textAlign: "center" }}>Perfil</h1>
-
           <Container>
             <Row>
               <Col xs={6} md={4}>
                 <Image
                   style={{ height: 400, width: 400 }}
                   src={"http://localhost:4000/" + usuario.fotoUsuario}
-                  rounded 
+                  rounded
                 />
               </Col>
               <Col>
